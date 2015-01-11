@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head prefix="og: http://ogp.me/ns#">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>事件數據視覺化</title>
+    <!-- libraries-->
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:image" content="http://zbryikt.github.io/visualize/disaster/img/thumbnail.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="200">
+    <meta property="og:image:height" content="200">
+    <script type="text/javascript" src="assets/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/angular/1.2.3/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap/3.0.2/css/bootstrap.flatly.min.css">
+    <script type="text/javascript" src="assets/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <!-- custom files-->
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.png">
+    <script type="text/javascript" src="index.js"></script>
+    <script src="//maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places"></script>
+  </head>
+  <body>
+    <div id="widget" ng-app="0media.events" ng-controller="0media.events.main">
+      <div id="zm-event" ng-class="[style,loaded,dim.htype,dim.wtype]" class="default">
+        <div class="dimmer"><img src="img/spin.gif"><br><br>Preparing the timeline</div>
+        <div class="timeline">
+          <div class="timeline-inner">
+            <div class="header">
+              <div class="name">{{current.name}}</div>
+              <div class="casualty">{{current.casualty.die}}死 {{current.casualty.hurt}}傷</div>
+            </div>
+            <div class="background"></div>
+            <div class="line-wrap">
+              <div class="line"></div>
+            </div>
+            <div class="events">
+              <div ng-attr-style="top:{{events.top}}px" ng-class="{'spd1':speed==1,'spd2':speed==2,'spd3':speed==3}" class="events-inner">
+                <div ng-repeat="event in events" ng-attr-style="top:{{event.top}}px;opacity:{{event.fadeout}}" ng-class="{'top':event.first}" class="event">
+                  <div ng-class="{'xl':event.casualty.total&gt;2000,'lg':event.casualty.total&lt;2000 &amp;&amp; event.casualty.total&gt;500}" class="circle"></div>
+                  <div class="desc">
+                    <div class="data">{{event.date}}</div>
+                    <div ng-attr-style="opacity:{{event.opacity}}" class="name">{{event.name}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ctrlpanel"><i ng-click="reset()" class="glyphicon glyphicon-fast-backward"></i><i ng-click="play()" ng-show="state!=1" class="glyphicon glyphicon-play"></i><i ng-click="pause()" ng-show="state!=0" class="glyphicon glyphicon-pause"></i><i ng-click="speeding()" class="glyphicon speed">{{speed}}X</i>
+          <div class="pull-right"><i ng-click="step(-1)" ng-class="{'active':dir==-1}" class="glyphicon glyphicon-chevron-up"></i><i ng-click="step(1)" ng-class="{'active':dir==1}" class="glyphicon glyphicon-chevron-down"></i></div>
+        </div>
+        <div class="eventmap"></div>
+        <div class="bubbles">
+          <div ng-repeat="event in events" ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}" ng-class="{'in':event.bubble.state==1,'out':event.bubble.state==2}" class="bubble"></div>
+        </div>
+        <div class="infopanel">
+          <div class="pull-right"><i class="glyphicon glyphicon-share"></i></div>
+          <div ng-cloak class="date pull-left">{{current.date}}</div>
+          <div ng-cloak class="title">{{current.name}}</div>
+          <div class="casualty pull-right">
+            <div ng-cloak class="c-die">{{current.casualty.die}}<small>死</small></div>
+            <div ng-cloak class="c-hurt">{{current.casualty.hurt}}<small>傷</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
