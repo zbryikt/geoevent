@@ -42,7 +42,7 @@ html(lang="en")
               .casualty {{current.casualty.die}}死 {{current.casualty.hurt}}傷
             .background
             .line-wrap: .line
-            .events
+            .events: .events-inner(ng-attr-style="top:{{events.top}}px",ng-class="{'spd1':speed==1,'spd2':speed==2,'spd3':speed==3}")
               .event(ng-repeat="event in events",
                   ng-attr-style="top:{{event.top}}px;opacity:{{event.fadeout}}",
                   ng-class="{'top':event.first}")
@@ -57,11 +57,11 @@ html(lang="en")
             i.glyphicon.glyphicon-pause(ng-click="pause()",ng-show="state!=0")
             i.glyphicon.speed(ng-click="speeding()") {{speed}}X
             .pull-right
-              i.glyphicon.glyphicon-chevron-up(ng-click="step(-1)")
-              i.glyphicon.glyphicon-chevron-down(ng-click="step(1)")
+              i.glyphicon.glyphicon-chevron-up(ng-click="step(-1)",ng-class="{'active':dir==-1}")
+              i.glyphicon.glyphicon-chevron-down(ng-click="step(1)",ng-class="{'active':dir==1}")
           .eventmap
           .bubbles
-            .bubble(ng-repeat="event in events",ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}",ng-class="{'prepare':event.bubble.state==1,'fire':event.bubble.state==2}")
+            .bubble(ng-repeat="event in events",ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}",ng-class="{'in':event.bubble.state==1,'out':event.bubble.state==2}") 
           .infopanel
             .pull-right: i.glyphicon.glyphicon-share
             .date.pull-left(ng-cloak) {{current.date}}

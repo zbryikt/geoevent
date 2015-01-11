@@ -44,22 +44,24 @@
                   <div class="line"></div>
                 </div>
                 <div class="events">
-                  <div ng-repeat="event in events" ng-attr-style="top:{{event.top}}px;opacity:{{event.fadeout}}" ng-class="{'top':event.first}" class="event">
-                    <div ng-class="{'xl':event.casualty.total&gt;2000,'lg':event.casualty.total&lt;2000 &amp;&amp; event.casualty.total&gt;500}" class="circle"></div>
-                    <div class="desc">
-                      <div class="data">{{event.date}}</div>
-                      <div ng-attr-style="opacity:{{event.opacity}}" class="name">{{event.name}}</div>
+                  <div ng-attr-style="top:{{events.top}}px" ng-class="{'spd1':speed==1,'spd2':speed==2,'spd3':speed==3}" class="events-inner">
+                    <div ng-repeat="event in events" ng-attr-style="top:{{event.top}}px;opacity:{{event.fadeout}}" ng-class="{'top':event.first}" class="event">
+                      <div ng-class="{'xl':event.casualty.total&gt;2000,'lg':event.casualty.total&lt;2000 &amp;&amp; event.casualty.total&gt;500}" class="circle"></div>
+                      <div class="desc">
+                        <div class="data">{{event.date}}</div>
+                        <div ng-attr-style="opacity:{{event.opacity}}" class="name">{{event.name}}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="ctrlpanel"><i ng-click="reset()" class="glyphicon glyphicon-fast-backward"></i><i ng-click="play()" ng-show="state!=1" class="glyphicon glyphicon-play"></i><i ng-click="pause()" ng-show="state!=0" class="glyphicon glyphicon-pause"></i><i ng-click="speeding()" class="glyphicon speed">{{speed}}X</i>
-              <div class="pull-right"><i ng-click="step(-1)" class="glyphicon glyphicon-chevron-up"></i><i ng-click="step(1)" class="glyphicon glyphicon-chevron-down"></i></div>
+              <div class="pull-right"><i ng-click="step(-1)" ng-class="{'active':dir==-1}" class="glyphicon glyphicon-chevron-up"></i><i ng-click="step(1)" ng-class="{'active':dir==1}" class="glyphicon glyphicon-chevron-down"></i></div>
             </div>
             <div class="eventmap"></div>
             <div class="bubbles">
-              <div ng-repeat="event in events" ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}" ng-class="{'prepare':event.bubble.state==1,'fire':event.bubble.state==2}" class="bubble"></div>
+              <div ng-repeat="event in events" ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}" ng-class="{'in':event.bubble.state==1,'out':event.bubble.state==2}" class="bubble"></div>
             </div>
             <div class="infopanel">
               <div class="pull-right"><i class="glyphicon glyphicon-share"></i></div>

@@ -31,20 +31,27 @@ angular.module \0media.events, <[]>
           event <<< overlay.ll2p(event.lat, event.lng){x,y}
           event.rate = z
 
-    $scope.reset = (partial=false) -> $scope.events.map (it, i) -> 
-      it <<< {fadeout: 1, opacity: 0, size: 0, circle_opacity: 0, bubble: {}, first: false}
-      if !partial => it.top = i * 50 + 65
-      it
+    $scope.reset = (partial=false) -> 
+      $scope.events.top = 5
+      $scope.step-count = 0
+      $scope.events.map (it, i) -> 
+        it <<< {fadeout: 1, opacity: 0.8, size: 0, circle_opacity: 0, bubble: {}, first: false}
+        if !partial => it.top = i * 50
+        it
     $scope.set-style = (style) ->
       $scope.style = style
       $scope.map.set \styles, map-style[style]
-    $scope.play = -> $scope.state = 1
+    $scope.play = -> 
+      $scope.state = 1
+      $scope.dir = 1
     $scope.pause = -> $scope.state = 0
     $scope.speeding = -> $scope.speed = ($scope.speed % 3) + 1
     $scope.step = (dir) -> 
+      if dir !=$scope.dir =>
+        $scope.events.map (it, i) -> it <<< {bubble: {state: 0}, size: 0, circle_opacity: 0}
       $scope.dir = dir
-      $scope.reset true
-      $scope.play!
+      
+      $scope.state = 2
     $scope.state = 1
     $scope.speed = 3
     $scope.dir = 1
@@ -73,6 +80,7 @@ angular.module \0media.events, <[]>
         data = data.filter -> it.lat and it.lng and it.casualty.total
         lats = data.map(->it.lat)sort!
         lngs = data.map(->it.lng)sort!
+        /*
         step = ->
           hit = 0
           chosen = false
@@ -113,7 +121,39 @@ angular.module \0media.events, <[]>
             it
           if hit => $timeout step, 910 - ($scope.speed * 300)
           else $timeout step, 40 - ($scope.speed * 10)
-        $timeout step, 30
+        */
+        $scope.step-count = 0
+        step2 = ->
+          if $scope.state => 
+            ani-fire = data[$scope.step-count + $scope.dir]
+            if ani-fire => 
+              ani-fire.circle_opacity = 1
+              ani-fire.bubble.state = 1
+              ani-fire.size = ani-fire.casualty.radius * ani-fire.rate
+            if ani-fire => $scope.current = ani-fire
+            ani-hold = data[$scope.step-count]
+            if ani-hold => ani-hold.bubble.state = 2
+
+            ani-hide = data[$scope.step-count - $scope.dir]
+            if ani-hide => ani-hide.circle_opacity = 0
+
+            $scope.events.top = ($scope.events.top or 5) - 50 * $scope.dir
+            if $scope.events.top > 5 =>
+              $scope.events.top = 5
+              $scope.state = 0
+            if $scope.events.top < (5 - ( $scope.events.length - 1 ) * 50) =>
+              $scope.events.top = 5 - ( $scope.events.length - 1 ) * 50
+              $scope.state = 0
+
+            $scope.step-count += $scope.dir
+            $scope.step-count >?= 0
+            $scope.step-count <?= ( $scope.events.length - 1)
+
+          if $scope.state == 2 => $scope.state = 0
+          $timeout step2, [1600 800 300][$scope.speed - 1]
+
+        #$timeout step, 30
+        $timeout step2, 0
         $scope.events = data
         $scope.reset!
         $scope.map = map.init mapnode.0, [lats.0, lats[* - 1]], [lngs.0, lngs[* - 1]], resize, overlay-adapter

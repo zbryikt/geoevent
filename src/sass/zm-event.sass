@@ -70,6 +70,20 @@
       top: 0
       left: 0
       width: 100%
+      height: 100%
+      margin-top: 60px
+      overflow: hidden
+    .events-inner
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      &.spd1
+        @include transition(top 1.6s ease-in-out)
+      &.spd2
+        @include transition(top 0.8s ease-in-out)
+      &.spd3
+        @include transition(top 0.3s linear)
     .event
       position: absolute
       top: 65px
@@ -129,6 +143,11 @@
       padding: 4px
       display: inline-block
       cursor: pointer
+      opacity: 0.7
+      &.active
+        opacity: 1
+        text-shadow: 0 0 3px rgba(255,255,0,1)
+
       @include no-selection
     .speed
       vertical-align: top
@@ -170,11 +189,9 @@
     @include transform(translate(-50%,-50%))
     z-index: index($order, bubble)
     border-radius: 50%
-    &.prepare
-      opacity: 1
-      width: 0
-      height: 0
-    &.fire
+    &.in
+      @include transition(width 1s ease-out, height 1s ease-out)
+    &.out
       @include transition(width 1s ease-out, height 1s ease-out, opacity 2s ease-out)
   .dimmer
     display: none
@@ -210,6 +227,8 @@
     bottom: 50px
     width: 170px
     left: 10px
+  .events
+    margin-top: 10px
   .timeline-inner
     box-shadow: none
     .background
@@ -218,8 +237,6 @@
       display: none
     .line-wrap
       padding-top: 20px
-    .events
-      top: -52px
 
 @include dim-max(w,xs,#zm-event)
   .ctrlpanel
@@ -228,6 +245,11 @@
     bottom: 50px
     width: 170px
     left: 10px
+  .events
+    margin-top: 10px
+  .line-wrap
+    padding-top: 20px
+    padding-bottom: 10px
   .timeline
     padding-bottom: 90px
   .timeline-inner

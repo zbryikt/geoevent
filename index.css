@@ -129,7 +129,33 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    margin-top: 60px;
+    overflow: hidden; }
+  #zm-event .timeline-inner .events-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%; }
+    #zm-event .timeline-inner .events-inner.spd1 {
+      -ms-transition: top 1.6s ease-in-out;
+      -moz-transition: top 1.6s ease-in-out;
+      -webkit-transition: top 1.6s ease-in-out;
+      -o-transition: top 1.6s ease-in-out;
+      transition: top 1.6s ease-in-out; }
+    #zm-event .timeline-inner .events-inner.spd2 {
+      -ms-transition: top 0.8s ease-in-out;
+      -moz-transition: top 0.8s ease-in-out;
+      -webkit-transition: top 0.8s ease-in-out;
+      -o-transition: top 0.8s ease-in-out;
+      transition: top 0.8s ease-in-out; }
+    #zm-event .timeline-inner .events-inner.spd3 {
+      -ms-transition: top 0.3s linear;
+      -moz-transition: top 0.3s linear;
+      -webkit-transition: top 0.3s linear;
+      -o-transition: top 0.3s linear;
+      transition: top 0.3s linear; }
   #zm-event .timeline-inner .event {
     position: absolute;
     top: 65px;
@@ -200,12 +226,16 @@ html, body {
     padding: 4px;
     display: inline-block;
     cursor: pointer;
+    opacity: 0.7;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
+    #zm-event .ctrlpanel i.glyphicon.active {
+      opacity: 1;
+      text-shadow: 0 0 3px yellow; }
   #zm-event .ctrlpanel .speed {
     vertical-align: top;
     font-family: arial;
@@ -253,11 +283,13 @@ html, body {
   transform: translate(-50%, -50%);
   z-index: 3;
   border-radius: 50%; }
-  #zm-event .bubble.prepare {
-    opacity: 1;
-    width: 0;
-    height: 0; }
-  #zm-event .bubble.fire {
+  #zm-event .bubble.in {
+    -ms-transition: width 1s ease-out, height 1s ease-out;
+    -moz-transition: width 1s ease-out, height 1s ease-out;
+    -webkit-transition: width 1s ease-out, height 1s ease-out;
+    -o-transition: width 1s ease-out, height 1s ease-out;
+    transition: width 1s ease-out, height 1s ease-out; }
+  #zm-event .bubble.out {
     -ms-transition: width 1s ease-out, height 1s ease-out, opacity 2s ease-out;
     -moz-transition: width 1s ease-out, height 1s ease-out, opacity 2s ease-out;
     -webkit-transition: width 1s ease-out, height 1s ease-out, opacity 2s ease-out;
@@ -296,6 +328,8 @@ html, body {
   bottom: 50px;
   width: 170px;
   left: 10px; }
+#zm-event.h-mc .events {
+  margin-top: 10px; }
 #zm-event.h-mc .timeline-inner {
   box-shadow: none; }
   #zm-event.h-mc .timeline-inner .background {
@@ -304,8 +338,6 @@ html, body {
     display: none; }
   #zm-event.h-mc .timeline-inner .line-wrap {
     padding-top: 20px; }
-  #zm-event.h-mc .timeline-inner .events {
-    top: -52px; }
 
 #zm-event.h-xs .ctrlpanel {
   border-radius: 5px;
@@ -313,6 +345,8 @@ html, body {
   bottom: 50px;
   width: 170px;
   left: 10px; }
+#zm-event.h-xs .events {
+  margin-top: 10px; }
 #zm-event.h-xs .timeline-inner {
   box-shadow: none; }
   #zm-event.h-xs .timeline-inner .background {
@@ -321,8 +355,6 @@ html, body {
     display: none; }
   #zm-event.h-xs .timeline-inner .line-wrap {
     padding-top: 20px; }
-  #zm-event.h-xs .timeline-inner .events {
-    top: -52px; }
 
 #zm-event.w-mc .ctrlpanel {
   border-radius: 5px;
@@ -330,6 +362,11 @@ html, body {
   bottom: 50px;
   width: 170px;
   left: 10px; }
+#zm-event.w-mc .events {
+  margin-top: 10px; }
+#zm-event.w-mc .line-wrap {
+  padding-top: 20px;
+  padding-bottom: 10px; }
 #zm-event.w-mc .timeline {
   padding-bottom: 90px; }
 #zm-event.w-mc .timeline-inner {
@@ -352,6 +389,11 @@ html, body {
   bottom: 50px;
   width: 170px;
   left: 10px; }
+#zm-event.w-xs .events {
+  margin-top: 10px; }
+#zm-event.w-xs .line-wrap {
+  padding-top: 20px;
+  padding-bottom: 10px; }
 #zm-event.w-xs .timeline {
   padding-bottom: 90px; }
 #zm-event.w-xs .timeline-inner {
@@ -410,7 +452,7 @@ html, body {
   background: #2d3240;
   color: #eee; }
 #zm-event.default .ctrlpanel {
-  background: rgba(255, 255, 255, 0.1);
+  background: #26252b;
   color: #fff; }
 #zm-event.default .timeline .header {
   color: #fff;
@@ -521,7 +563,7 @@ html, body {
   background: #0ea688;
   color: #fff; }
 #zm-event.green .ctrlpanel {
-  background: rgba(14, 166, 136, 0.7);
+  background: rgba(14, 166, 136, 0.9);
   color: #fff; }
 #zm-event.green .timeline .header {
   color: #fff;
