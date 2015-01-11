@@ -1,0 +1,65 @@
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
+=transition($args...)
+  -ms-transition: $args
+  -moz-transition: $args
+  -webkit-transition: $args
+  -o-transition: $args
+  transition: $args
+
+=animation($arg)
+  -ms-animation: $arg
+  -moz-animation: $arg
+  -webkit-animation: $arg
+  -o-animation: $arg
+  animation: $arg
+
+=animation-delay($arg)
+  -ms-animation-delay: $arg
+  -moz-animation-delay: $arg
+  -webkit-animation-delay: $arg
+  -o-animation-delay: $arg
+  animation-delay: $arg
+
+=transform($arg...)
+  -ms-transform: $arg
+  -moz-transform: $arg
+  -webkit-transform: $arg
+  -o-transform: $arg
+  transform: $arg
+
+=no-selection
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+=ellipsis
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+=dim-max($d, $s, $c)
+  @each $v in $dim
+    @if index($dim,$v) <= index($dim,$s)
+      #{$c}.#{$d}-#{$v}
+        @content
+
+=dim-min($d, $s, $c)
+  @each $v in $dim
+    @if index($dim,$v) >= index($dim,$s)
+      #{$c}.#{$d}-#{$v}
+        @content
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak
+  display: none !important

@@ -1,0 +1,293 @@
+@import basic
+@import vars
+
+#zm-event
+  width: 100%
+  height: 100%
+  padding-bottom: 40px
+  font-family: 'Open Sans', sans-serif
+
+#zm-event
+  .eventmap
+    width: 100%
+    height: 100%
+    z-index: index($order, eventmap)
+  .timeline
+    height: 100%
+    padding: 20px 0 70px 20px
+    z-index: index($order, timeline)
+    position: absolute
+    top: 0
+    left: 0
+    width: 220px
+  .timeline-inner
+    position: relative
+    border-radius: 5px
+    height: 100%
+    width: 100%
+    overflow: hidden
+    box-shadow: 0 2px 1px rgba(0,0,0,0.5)
+
+    .header
+      position: absolute
+      z-index: index($order, timeline-title)
+      top: 0
+      left: 0
+      width: 100%
+      height: 60px
+      text-align: center
+      @include no-selection
+      .name
+        font-size: 1.1em
+        padding: 10px 10px 0
+        width: 100%
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+      .casualty
+        font-size: 0.8em
+
+    .background
+      position: absolute
+      top: 0
+      left: 0
+      z-index: index($order, timeline-bk)
+      width: 100%
+      height: 100%
+
+    .line-wrap
+      position: absolute
+      z-index: index($order, timeline-line)
+      padding: 72px 0 40px 15px
+      height: 100%
+    .line
+      border-radius: 5px
+      height: 100%
+      width: 4px
+
+    .events
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+    .event
+      position: absolute
+      top: 65px
+      width: 100%
+      z-index: index($order, timeline-event)
+      font-size: 12px
+      @include no-selection
+      .desc
+        position: absolute
+        letter-spacing: 1px
+        left: 0
+        width: 100%
+        padding: 0 10px 0 30px
+        .name
+          white-space: nowrap
+          overflow: hidden
+          text-overflow: ellipsis
+
+    .circle
+      z-index: index($order, timeline-circle)
+      position: absolute
+      top: 4px
+      left: 17px
+      width: 8px
+      height: 8px
+      border-radius: 50%
+      margin-left: -4px
+      @include transition(box-shadow 0.1s linear, border 0.5s linear)
+      &.lg
+        width: 12px
+        height: 12px
+        margin-left: -6px
+        top: 1px
+      &.xl
+        width: 16px
+        height: 16px
+        margin-left: -8px
+        top: 1px
+    .event.top .circle
+      border: 1px solid #fff
+
+  .ctrlpanel
+    position: absolute
+    z-index: index($order, ctrlpanel)
+    width: 200px
+    height: 30px
+    bottom: 70px
+    left: 20px
+    padding: 0 5px
+    margin-top: -10px
+    border-bottom-left-radius: 5px
+    border-bottom-right-radius: 5px
+    @include no-selection
+
+    i.glyphicon
+      margin: 3px 4px
+      padding: 4px
+      display: inline-block
+      cursor: pointer
+      @include no-selection
+    .speed
+      vertical-align: top
+      font-family: arial
+      font-size: 12px
+      font-weight: 900
+      line-height: 18px
+
+  .infopanel
+    z-index: index($order, subtitle)
+    width: 100%
+    height: 40px
+    text-align: center
+    font-size: 16px
+    letter-spacing: 1.5px
+    line-height: 40px
+    text-shadow: 0 2px 2px rgba(0,0,0,0.4)
+    padding: 0 10px
+    @include ellipsis
+    @include no-selection
+
+  .infopanel
+    .date, .title, .casualty, .c-hurt, .c-die
+      display: inline-block
+    .casualty
+      margin-right: 10px
+    .c-hurt, .c-die
+      font-size: 0.8em
+      min-width: 60px
+      text-align: right
+
+  .bubble
+    width: 0
+    height: 0
+    border: 4px solid #fff
+    position: absolute
+    top: 0px
+    left: 0px
+    @include transform(translate(-50%,-50%))
+    z-index: index($order, bubble)
+    border-radius: 50%
+    &.prepare
+      opacity: 1
+      width: 0
+      height: 0
+    &.fire
+      @include transition(width 1s ease-out, height 1s ease-out, opacity 2s ease-out)
+  .dimmer
+    display: none
+    background: rgba(128,128,128,1) url(img/blurmap.jpg) center center no-repeat
+    background-size: cover
+    width: 100%
+    height: 100%
+    text-align: center
+    vertical-align: middle
+    line-height: 100%
+    color: #123
+    &:before
+      content: " "
+      display: inline-block
+      height: 50%
+      width: 0
+
+#zm-event.loading
+  padding-bottom: 0
+  .timeline
+    display: none
+  .infopanel
+    display: none
+  .ctrlpanel
+    display: none
+  .dimmer
+    display: block
+
+@include dim-max(h,xs,#zm-event)
+  .ctrlpanel
+    border-radius: 5px
+    top: initial
+    bottom: 50px
+    width: 170px
+    left: 10px
+  .timeline-inner
+    box-shadow: none
+    .background
+      display: none
+    .header
+      display: none
+    .line-wrap
+      padding-top: 20px
+    .events
+      top: -52px
+
+@include dim-max(w,xs,#zm-event)
+  .ctrlpanel
+    border-radius: 5px
+    top: initial
+    bottom: 50px
+    width: 170px
+    left: 10px
+  .timeline
+    padding-bottom: 90px
+  .timeline-inner
+    box-shadow: none
+    width: 100px
+    overflow: visible
+    .background
+      display: none
+    .header
+      display: none
+  .events .event
+    .desc .name
+      display: none
+    &.top .name
+      display: inline-block
+      font-weight: 900
+
+@include dim-max(w,mc,#zm-event)
+  padding-bottom: 70px
+  .infopanel
+    margin-top: 30px
+    .casualty
+      display: inline-block
+      line-height: 16px
+      font-size: 12px
+      padding: 4px 0
+      & > div
+        display: block
+    .date
+      font-size: 12px
+    // move date and casualty to the top if need
+      .casualty, .date
+        position: absolute
+        z-index: index($order, infotext)
+        top: 0
+      .casualty
+        right: 5px
+      .date
+        left: 5px
+  .ctrlpanel
+    border-radius: 5px
+    top: initial
+    bottom: 50px
+    width: 170px
+    left: 10px
+    width: 100%
+    margin: 0
+    left: 0
+    bottom: 40px
+    top: initial
+    border-radius: 0
+  .timeline
+    width: 40px
+    padding-left: 0
+    overflow: visible
+    .events .desc
+      display: none
+
+@include dim-max(h,mc,#zm-event)
+  .timeline
+    display: none
+
+@import style/index

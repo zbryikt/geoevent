@@ -1,0 +1,57 @@
+@import basic
+@import vars
+
+html,body
+  margin: 0
+  padding: 0
+  width: 100%
+  height: 100%
+  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif
+
+#content
+  width: 100%
+  height: 100%
+  padding: 10px
+
+#layout
+  position: absolute
+  top: 0
+  left: 20%
+  width: 60%
+  margin: 4% 0 
+  height: 68%
+  @media (max-width: 480px)
+    left: 0
+    width: 100%
+    height: 100%
+    margin: 0
+    padding-bottom: 30px
+    .btn
+      border-radius: 0
+      float: right
+
+#main
+  background: #eee
+  width: 100%
+  height: 100%
+  position: relative
+  z-index: index($order, main)
+  border-radius: 5px
+  overflow: hidden
+  box-shadow: 0 2px 2px rgba(0,0,0,0.5)
+  @media (max-width: 480px)
+    border-radius: 0
+    box-shadow: none
+
+#color
+  margin-bottom: 3px
+  @media (max-width:480px)
+    margin-bottom: 0
+    .btn, .btn-sm
+      padding: 2px 5px
+      font-size: 0.8em
+
+#title img
+  height: 16px
+  width: 16px
+@import zm-event

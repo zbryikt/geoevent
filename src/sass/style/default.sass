@@ -1,0 +1,56 @@
+#zm-event.default
+  .bubble
+    background: rgba(255,128,64,0.3)
+    border: 4px solid rgba(255,0,0,1.0)
+
+  .infopanel
+    background: rgba(45, 50, 64, 1.0)
+    color: #eee
+
+  .ctrlpanel
+    background: rgba(255,255,255,0.1)
+    color: #fff
+
+  .timeline
+    .header
+      color: #fff
+      background: rgba(0,0,0,0.7)
+
+    .background
+      opacity: 0.5
+      background: #3e5170
+      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzNlNTE3MCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+)
+      background: -moz-linear-gradient(top, #3e5170 0%, #000000 100%)
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3e5170), color-stop(100%,#000000))
+      background: -webkit-linear-gradient(top, #3e5170 0%,#000000 100%)
+      background: -o-linear-gradient(top, #3e5170 0%,#000000 100%)
+      background: -ms-linear-gradient(top, #3e5170 0%,#000000 100%)
+      background: linear-gradient(to bottom, #3e5170 0%,#000000 100%)
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3e5170', endColorstr='#000000',GradientType=0 )
+
+    .line
+      background: rgba(255,255,255,0.28)
+
+    .event
+      color: #fff
+
+    .circle
+      background: #fff
+      &.lg
+        background: #fff
+      &.xl
+        background: #f99
+    .event.top .circle
+      box-shadow: 0 0 10px rgba(255,255,255,1)
+      border: 1px solid #ff0
+
+@include dim-max(w,xs,'#zm-event.default')
+  .timeline-inner
+    background: rgba(0,0,0,0.5)
+@include dim-max(w,mc,'#zm-event.default')
+  .timeline-inner
+    background: none
+@include dim-max(w,xs,'#zm-event.default')
+  .ctrlpanel
+    background: #4B4F59
+

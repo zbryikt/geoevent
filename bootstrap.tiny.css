@@ -1,0 +1,57 @@
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 10px 15px;
+  font-size: 15px;
+  line-height: 1.42857;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.btn-sm {
+  padding: 6px 9px;
+  font-size: 13px;
+  line-height: 1.5;
+  border-radius: 3px; }
+
+.btn-primary {
+  color: #ffffff;
+  background-color: #2c3e50;
+  border-color: #2c3e50; }
+
+.btn-default {
+  color: #ffffff;
+  background-color: #95a5a6;
+  border-color: #95a5a6; }
+
+.btn-success {
+  color: #ffffff;
+  background-color: #18bc9c;
+  border-color: #18bc9c; }
+
+.pull-right {
+  float: right; }
+
+.pull-left {
+  float: left; }
+
+* {
+  box-sizing: border-box; }
+
+.clearfix:before, .clearfix:after {
+  display: table;
+  content: " "; }
+
+.clearfix:after {
+  clear: both; }

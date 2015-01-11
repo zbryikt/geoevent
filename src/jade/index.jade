@@ -1,0 +1,75 @@
+doctype html
+//- basic libraries: jquery(1.10.2), d3js(3.3.11), angularjs(1.2.3), bootstrap(3.0)/semantic-ui(0.9.3/0.9.5)
+- var usecdn = false
+- var useog = true
+- var lib = { jquery: true, d3js: false, angular: true, bootstrap: true, semantic: false }
+- var assets = "assets"
+- var thumbnail = "http://zbryikt.github.io/visualize/disaster/img/thumbnail.png"
+html(lang="en")
+  head(prefix="og: http://ogp.me/ns#")
+    meta(charset="utf-8")
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title 事件數據視覺化
+    // libraries
+    include library.jade
+    // custom files
+    link(rel="stylesheet",type="text/css",href="index.css")
+    link(rel="icon",type="image/x-icon",href="img/favicon.png")
+    script(type="text/javascript",src="index.js")
+    script(src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places")
+  body
+    #content
+      #layout(ng-app="0media.events",ng-controller="0media.events.main")
+        #color.form-group
+          span.pull-right
+            .btn.btn-primary.btn-sm(ng-click="setStyle('default')") 預設
+            .btn.btn-default.btn-sm(ng-click="setStyle('gray')") 亮灰
+            .btn.btn-success.btn-sm(ng-click="setStyle('green')") 淺綠
+          #title.btn-sm.pull-left: strong 
+            img(src="img/favicon.png")
+            |  事件數據視覺化
+
+          .clearfix
+        #main: #zm-event.default(ng-class="[style,loaded,dim.htype,dim.wtype]")
+          .dimmer
+            img(src="img/spin.gif")
+            br
+            br
+            | 準備時間軸
+          .timeline: .timeline-inner
+            .header
+              .name {{current.name}}
+              .casualty {{current.casualty.die}}死 {{current.casualty.hurt}}傷
+            .background
+            .line-wrap: .line
+            .events
+              .event(ng-repeat="event in events",
+                  ng-attr-style="top:{{event.top}}px;opacity:{{event.fadeout}}",
+                  ng-class="{'top':event.first}")
+                .circle(ng-class="{'xl':event.casualty.total>2000,'lg':event.casualty.total<2000 && event.casualty.total>500}")
+                .desc
+                  .data {{event.date}}
+                  .name(ng-attr-style="opacity:{{event.opacity}}") {{event.name}}
+
+          .ctrlpanel
+            i.glyphicon.glyphicon-fast-backward(ng-click="reset()")
+            i.glyphicon.glyphicon-play(ng-click="play()",ng-show="state!=1")
+            i.glyphicon.glyphicon-pause(ng-click="pause()",ng-show="state!=0")
+            i.glyphicon.speed(ng-click="speeding()") {{speed}}X
+            .pull-right
+              i.glyphicon.glyphicon-chevron-up(ng-click="step(-1)")
+              i.glyphicon.glyphicon-chevron-down(ng-click="step(1)")
+          .eventmap
+          .bubbles
+            .bubble(ng-repeat="event in events",ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}",ng-class="{'prepare':event.bubble.state==1,'fire':event.bubble.state==2}")
+          .infopanel
+            .pull-right: i.glyphicon.glyphicon-share
+            .date.pull-left(ng-cloak) {{current.date}}
+            .title(ng-cloak) {{current.name}}
+            .casualty.pull-right
+              .c-die(ng-cloak)
+                | {{current.casualty.die}}
+                small 死
+              .c-hurt(ng-cloak)
+                | {{current.casualty.hurt}}
+                small 傷
