@@ -168,6 +168,8 @@
     padding: 0 10px
     @include ellipsis
     @include no-selection
+    .glyphicon
+      cursor: pointer
 
   .infopanel
     .date, .title, .casualty, .c-hurt, .c-die
@@ -220,6 +222,30 @@
   .dimmer
     display: block
 
+#zm-event .home-popover
+  position: absolute
+  top: 10px
+  right: 10px
+  background: #fff
+  padding: 1px 7px
+  border-radius: 3px
+  z-index: index($order, popover)
+  font-size: 14px
+  cursor: pointer
+  box-shadow: 0 1px 1px rgba(0,0,0,0.3)
+  &:after
+    content: " "
+    display: block
+    background: #fff
+    width: 7px
+    height: 7px
+    position: absolute
+    top: -4px
+    right: 10px
+    box-shadow: -1px -1px 1px rgba(0,0,0,0.3)
+    @include transform(rotate(45deg))
+
+
 @include dim-max(h,xs,#zm-event)
   .ctrlpanel
     border-radius: 5px
@@ -239,6 +265,8 @@
       padding-top: 20px
 
 @include dim-max(w,xs,#zm-event)
+  .home-popover
+    font-size: 12px
   .ctrlpanel
     border-radius: 5px
     top: initial

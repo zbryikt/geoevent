@@ -299,6 +299,8 @@ html, body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
+  #zm-event .infopanel .glyphicon {
+    cursor: pointer; }
 #zm-event .infopanel .date, #zm-event .infopanel .title, #zm-event .infopanel .casualty, #zm-event .infopanel .c-hurt, #zm-event .infopanel .c-die {
   display: inline-block; }
 #zm-event .infopanel .casualty {
@@ -360,6 +362,33 @@ html, body {
   #zm-event.loading .dimmer {
     display: block; }
 
+#zm-event .home-popover {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #fff;
+  padding: 1px 7px;
+  border-radius: 3px;
+  z-index: 13;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); }
+  #zm-event .home-popover:after {
+    content: " ";
+    display: block;
+    background: #fff;
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    top: -4px;
+    right: 10px;
+    box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.3);
+    -ms-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg); }
+
 #zm-event.h-mc .ctrlpanel {
   border-radius: 5px;
   top: initial;
@@ -394,6 +423,8 @@ html, body {
   #zm-event.h-xs .timeline-inner .line-wrap {
     padding-top: 20px; }
 
+#zm-event.w-mc .home-popover {
+  font-size: 12px; }
 #zm-event.w-mc .ctrlpanel {
   border-radius: 5px;
   top: initial;
@@ -421,6 +452,8 @@ html, body {
   display: inline-block;
   font-weight: 900; }
 
+#zm-event.w-xs .home-popover {
+  font-size: 12px; }
 #zm-event.w-xs .ctrlpanel {
   border-radius: 5px;
   top: initial;
