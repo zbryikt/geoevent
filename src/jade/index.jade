@@ -9,7 +9,7 @@ html(lang="en")
   head(prefix="og: http://ogp.me/ns#")
     meta(charset="utf-8")
     meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-    title 事件數據視覺化
+    title Events Visualization
     // libraries
     include library.jade
     // custom files
@@ -28,7 +28,7 @@ html(lang="en")
               .btn.btn-success.btn-sm(ng-click="setStyle('green')") 淺綠
             #title.btn-sm.pull-left: strong 
               img(src="img/favicon.png")
-              |  事件數據視覺化
+              |  Events Visualization
             .clearfix
           #main: #zm-event.default(ng-class="[style,loaded,dim.htype,dim.wtype]")
             .dimmer
