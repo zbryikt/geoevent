@@ -115,7 +115,9 @@ html(lang="en")
           br
           p sample output will be like this:
           iframe#result(ng-attr-src="{{outurl}}")
-          p and here is the html code for embedding this in websites:
+          p here is the html code for embedding this in websites:
           textarea.form-control(ng-model="embedcode",rows="5")
+          p or the direct link to the result page:
+          input.form-control(ng-model="outurlwithhost",ng-disabled="true")
 
           #footer

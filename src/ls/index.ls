@@ -7,9 +7,11 @@ angular.module \main, <[0media.events]>
     $scope.update-widget = ->
       $timeout ->
         ret = /\/d\/([^\/]+)/.exec $scope.datasrc
-        if !ret or !$scope.style => return
+        if !ret or !$scope.style or !$scope.ratio => return
         $scope.outurl = "/widget/?src=#{ret.1}&color=#{$scope.style}&ratio=#{$scope.ratio}"
+        $scope.outurlwithhost = host + $scope.outurl
         $scope.embedcode = "<iframe src='#host/#{$scope.outurl}'>"
       , 1000
     $scope.$watch 'datasrc', $scope.update-widget
     $scope.$watch 'style', $scope.update-widget
+    $scope.$watch 'ratio', $scope.update-widget
