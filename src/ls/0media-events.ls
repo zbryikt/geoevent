@@ -67,19 +67,26 @@ angular.module \0media.events, <[]>
         url: "https://spreadsheets.google.com/feeds/list/#{config.src}/1/public/values?alt=json"
         method: \GET
       .success (d) -> 
+        console.log d
         data = d.feed.entry.map ->
-          date = it['gsx$日期']$t.replace /[年月]/g, '/'
+          date = it['gsx$date']$t.replace /[年月]/g, '/'
           date = date.replace /[日]/g, ''
           dateFull = new Date(date)
           m = dateFull.getMonth! + 1
           date = (dateFull.getYear! + 1900) + "/" + (if m < 10 => "0" else "") + m
-          ret = /(?:(\d+)死)?(?:(\d+)傷)?(?:(\d+)生還)?/.exec it['gsx$死傷']$t
-          casualty = {die: parseInt((ret and ret.1) or 0), hurt: parseInt((ret and ret.2) or 0), live: parseInt((ret and ret.3) or 0)}
+          #ret-death = /(?:(\d+)死)?(?:(\d+)傷)?(?:(\d+)生還)?/.exec it['gsx$death']$t
+          #ret-hurt = /(?:(\d+)死)?(?:(\d+)傷)?(?:(\d+)生還)?/.exec it['gsx$hurt']$t
+          #casualty = {die: parseInt((ret and ret.1) or 0), hurt: parseInt((ret and ret.2) or 0), live: parseInt((ret and ret.3) or 0)}
+          #casualty.total = casualty.die + casualty.hurt
+          casualty = {die: parseInt(it.gsx$death.$t), hurt: parseInt(it.gsx$wounded.$t)}
           casualty.total = casualty.die + casualty.hurt
           casualty.radius = parseInt( Math.sqrt(casualty.total ) ) * 3 + 10
-          lat = parseFloat(it['gsx$緯度']$t or 0)
-          lng = parseFloat(it['gsx$經度']$t or 0)
-          name = (it['gsx$短名']$t or it['gsx$事件']$t)trim!
+          #lat = parseFloat(it['gsx$緯度']$t or 0)
+          #lng = parseFloat(it['gsx$經度']$t or 0)
+          lat = parseFloat(it['gsx$latitude']$t or 0)
+          lng = parseFloat(it['gsx$longitude']$t or 0)
+          #name = (it['gsx$短名']$t or it['gsx$事件']$t)trim!
+          name = (it['gsx$shortname']$t or it['gsx$event']$t)trim!
           loc = new google.maps.LatLng(lat, lng)
           ret = {name, dateFull, casualty, lat, lng, loc, date}
           ret

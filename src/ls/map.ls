@@ -4,7 +4,7 @@ angular.module \0media.events
       map-option = do
         center: new google.maps.LatLng 23.624146, 120.320623
         zoom: 9
-        minZoom: 5
+        minZoom: 2
         maxZoom: 18
         mapTypeId: google.maps.MapTypeId.ROADMAP
         panControl: false
