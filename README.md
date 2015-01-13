@@ -1,31 +1,29 @@
-template
+GEOEVENT
 ========
 
-a web template, for simple frontend. it contains a simple webserver, watch daemon, and a makefile for offline building. It uses jade, sass and livescript to build a web page.
+Events visualization over maps.
 
 
 Usage
 ========
 
-Simply edit index.jade, index.sass and index.ls, and type 'make' to build these into index.html, index.css and index.js.
+Live demo is available here:
 
-You can also watch all your changes and build them automatically. To do so, run
-
-    npm i
-
-once (for installing all dependencies), then run
-
-    npm start
-
-It will start watching all sass, jade and livescript changes, and also run a simple web server listening on localhost:9999.
+   http://zbryikt.github.io/geoevent
 
 
-Configuration
+You will also find a wizard for building a visualization of your own with simply google spreadsheet. Here is an example of how the spreadsheet will look like:
+
+    https://docs.google.com/spreadsheets/d/1yY4pqGqI3rLMf5bQqe5XMztnnJ78RMUrfh-XpJdhd_o/
+
+
+License
 ========
 
-by default, some javascript libraries are included. Config to use them or cdn by editing following code in index.jade:
+MIT License.
 
-    - var usecdn = false
-    - var lib = { jquery: true, d3js: true, angular: true, bootstrap: false, semantic: true }
-    - var assets = "/assets"
 
+Credit
+========
+
+Kirby T. Wu
