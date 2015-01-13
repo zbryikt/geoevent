@@ -118,7 +118,11 @@ html(lang="en")
           iframe#result(ng-attr-src="{{outurlwithhost}}")
           p here is the html code for embedding this in websites:
           textarea.form-control(ng-model="embedcode",rows="5")
-          p or the direct link to the result page:
+          br
+          p 
+            | or the direct link to the result page: ( 
+            a(ng-attr-href="{{outurlwithhost}}",target="_blank") open in new tab
+            |  )
           input.form-control(ng-model="outurlwithhost",ng-disabled="true")
           br
           hr
