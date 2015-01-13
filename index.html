@@ -93,14 +93,25 @@
           <div class="form-group">
             <input placeholder="e.g., https://docs.google.com/spreadsheets/d/1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo/pubhtml" ng-model="datasrc" class="form-control">
           </div>
-          <p>and choose one colorschema:</p>
-          <div class="form-group">
-            <div class="btn-group">
-              <div ng-click="setStyle('default')" ng-class="{'active':style=='default'}" class="btn btn-primary btn-sm">Default</div>
-              <div ng-click="setStyle('gray')" ng-class="{'active':style=='gray'}" class="btn btn-default btn-sm">Gray</div>
-              <div ng-click="setStyle('green')" ng-class="{'active':style=='green'}" class="btn btn-success btn-sm">Green</div>
+          <p>and setup following configuration:</p>
+          <div class="form-inline">
+            <div class="form-group">
+              <label>colorschema</label><br>
+              <div class="btn-group">
+                <div ng-click="setStyle('default')" ng-class="{'active':style=='default'}" class="btn btn-primary btn-sm">Default</div>
+                <div ng-click="setStyle('gray')" ng-class="{'active':style=='gray'}" class="btn btn-default btn-sm">Gray</div>
+                <div ng-click="setStyle('green')" ng-class="{'active':style=='green'}" class="btn btn-success btn-sm">Green</div>
+              </div>
             </div>
-          </div>
+            <div class="form-group">
+              <label>circle size</label><br>
+              <div class="btn-group">
+                <div ng-click="setRatio(1)" ng-class="{'active':ratio==1}" class="btn btn-default btn-sm">Small</div>
+                <div ng-click="setRatio(5)" ng-class="{'active':ratio==5}" class="btn btn-info btn-sm">Medium</div>
+                <div ng-click="setRatio(20)" ng-class="{'active':ratio==20}" class="btn btn-primary btn-sm">Large</div>
+              </div>
+            </div>
+          </div><br>
           <p>sample output will be like this:</p>
           <iframe id="result" ng-attr-src="{{outurl}}"></iframe>
           <p>and here is the html code for embedding this in websites:</p>

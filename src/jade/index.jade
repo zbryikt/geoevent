@@ -96,12 +96,23 @@ html(lang="en")
             input.form-control(
               placeholder="e.g., https://docs.google.com/spreadsheets/d/1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo/pubhtml",
               ng-model="datasrc")
-          p and choose one colorschema:
-          .form-group
-            .btn-group
-              .btn.btn-primary.btn-sm(ng-click="setStyle('default')",ng-class="{'active':style=='default'}") Default
-              .btn.btn-default.btn-sm(ng-click="setStyle('gray')",ng-class="{'active':style=='gray'}") Gray
-              .btn.btn-success.btn-sm(ng-click="setStyle('green')",ng-class="{'active':style=='green'}") Green
+          p and setup following configuration:
+          .form-inline
+            .form-group
+              label colorschema
+              br
+              .btn-group
+                .btn.btn-primary.btn-sm(ng-click="setStyle('default')",ng-class="{'active':style=='default'}") Default
+                .btn.btn-default.btn-sm(ng-click="setStyle('gray')",ng-class="{'active':style=='gray'}") Gray
+                .btn.btn-success.btn-sm(ng-click="setStyle('green')",ng-class="{'active':style=='green'}") Green
+            .form-group
+              label circle size
+              br
+              .btn-group
+                .btn.btn-default.btn-sm(ng-click="setRatio(1)",ng-class="{'active':ratio==1}") Small
+                .btn.btn-info.btn-sm(ng-click="setRatio(5)",ng-class="{'active':ratio==5}") Medium
+                .btn.btn-primary.btn-sm(ng-click="setRatio(20)",ng-class="{'active':ratio==20}") Large
+          br
           p sample output will be like this:
           iframe#result(ng-attr-src="{{outurl}}")
           p and here is the html code for embedding this in websites:

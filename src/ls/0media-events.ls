@@ -57,13 +57,12 @@ angular.module \0media.events, <[]>
     $scope.dir = 1
     $scope.loaded = 'loading'
     $scope.initData = ->
-      config = {src: \1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo, color: \default}
+      config = {src: \1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo, color: \default,ratio: 1}
       ((window.location.search or "").split(\?).filter(->it).0 or "").split \& .map -> 
         ret = it.split \=
         config[ret.0] = ret.1
          
       $http do
-        #url: \https://spreadsheets.google.com/feeds/list/1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo/1/public/values?alt=json
         url: "https://spreadsheets.google.com/feeds/list/#{config.src}/1/public/values?alt=json"
         method: \GET
       .success (d) -> 
@@ -74,18 +73,11 @@ angular.module \0media.events, <[]>
           dateFull = new Date(date)
           m = dateFull.getMonth! + 1
           date = (dateFull.getYear! + 1900) + "/" + (if m < 10 => "0" else "") + m
-          #ret-death = /(?:(\d+)死)?(?:(\d+)傷)?(?:(\d+)生還)?/.exec it['gsx$death']$t
-          #ret-hurt = /(?:(\d+)死)?(?:(\d+)傷)?(?:(\d+)生還)?/.exec it['gsx$hurt']$t
-          #casualty = {die: parseInt((ret and ret.1) or 0), hurt: parseInt((ret and ret.2) or 0), live: parseInt((ret and ret.3) or 0)}
-          #casualty.total = casualty.die + casualty.hurt
           casualty = {die: parseInt(it.gsx$death.$t), hurt: parseInt(it.gsx$wounded.$t)}
           casualty.total = casualty.die + casualty.hurt
           casualty.radius = parseInt( Math.sqrt(casualty.total ) ) * 3 + 10
-          #lat = parseFloat(it['gsx$緯度']$t or 0)
-          #lng = parseFloat(it['gsx$經度']$t or 0)
           lat = parseFloat(it['gsx$latitude']$t or 0)
           lng = parseFloat(it['gsx$longitude']$t or 0)
-          #name = (it['gsx$短名']$t or it['gsx$事件']$t)trim!
           name = (it['gsx$shortname']$t or it['gsx$event']$t)trim!
           loc = new google.maps.LatLng(lat, lng)
           ret = {name, dateFull, casualty, lat, lng, loc, date}
@@ -93,8 +85,9 @@ angular.module \0media.events, <[]>
         data = data.filter -> it.lat and it.lng and it.casualty.total
         lats = data.map(->it.lat)sort!
         lngs = data.map(->it.lng)sort!
-        /*
-        step = ->
+        # TODO fallback to JS animation for browsers not supporting CSS3 transition
+        # Currently not used.
+        step-js-animation = ->
           hit = 0
           chosen = false
           line-h = $scope.dim.timeline-height
@@ -134,15 +127,15 @@ angular.module \0media.events, <[]>
             it
           if hit => $timeout step, 910 - ($scope.speed * 300)
           else $timeout step, 40 - ($scope.speed * 10)
-        */
+
         $scope.step-count = 0
-        step2 = ->
+        step-transition = ->
           if $scope.state => 
             ani-fire = data[$scope.step-count + $scope.dir]
             if ani-fire => 
               ani-fire.circle_opacity = 1
               ani-fire.bubble.state = 1
-              ani-fire.size = ani-fire.casualty.radius * ani-fire.rate
+              ani-fire.size = ani-fire.casualty.radius * ani-fire.rate * config.ratio
             if ani-fire => $scope.current = ani-fire
             ani-hold = data[$scope.step-count]
             if ani-hold => ani-hold.bubble.state = 2
@@ -163,14 +156,12 @@ angular.module \0media.events, <[]>
             $scope.step-count <?= ( $scope.events.length - 1)
 
           if $scope.state == 2 => $scope.state = 0
-          $timeout step2, [1600 800 300][$scope.speed - 1]
+          $timeout step-transition, [1600 800 300][$scope.speed - 1]
 
-        #$timeout step, 30
-        $timeout step2, 0
+        $timeout step-transition, 0
         $scope.events = data
         $scope.reset!
         $scope.map = map.init mapnode.0, [lats.0, lats[* - 1]], [lngs.0, lngs[* - 1]], resize, overlay-adapter
-        #$scope.set-style \default
         $scope.set-style config.color
         $scope.loaded = ''
         setTimeout resize, 0

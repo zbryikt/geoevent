@@ -3,7 +3,7 @@ doctype html
 - var usecdn = false
 - var useog = true
 - var lib = { jquery: true, d3js: false, angular: true, bootstrap: true, semantic: false }
-- var assets = "assets"
+- var assets = "../assets"
 - var thumbnail = "http://zbryikt.github.io/visualize/disaster/img/thumbnail.png"
 html(lang="en")
   head(prefix="og: http://ogp.me/ns#")
@@ -11,17 +11,17 @@ html(lang="en")
     meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
     title 事件數據視覺化
     // libraries
-    include library.jade
+    include ../library.jade
     // custom files
-    link(rel="stylesheet",type="text/css",href="index.css")
-    link(rel="icon",type="image/x-icon",href="img/favicon.png")
-    script(type="text/javascript",src="index.js")
+    link(rel="stylesheet",type="text/css",href="../index.css")
+    link(rel="icon",type="image/x-icon",href="../img/favicon.png")
+    script(type="text/javascript",src="../index.js")
     script(src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places")
   body
     #widget(ng-app="0media.events",ng-controller="0media.events.main")
       #zm-event.default(ng-class="[style,loaded,dim.htype,dim.wtype]")
         .dimmer
-          img(src="img/spin.gif")
+          img(src="../img/spin.gif")
           br
           br
           | Preparing the timeline

@@ -263,8 +263,8 @@ update-file = ->
     cmd = cmd.join \;
 
   if type == \jade => 
-    if /index.jade/.exec src => cmd = "#{jade} -P src/jade/index.jade -o ./"
-    else if /widget.jade/.exec src => cmd = "#{jade} -P src/jade/widget.jade -o ./"
+    if /widget\/index.jade/.exec src => cmd = "#{jade} -P src/jade/widget/index.jade -o ./widget/"
+    else if /index.jade$/.exec src => cmd = "#{jade} -P src/jade/index.jade -o ./"
   if !cmd => return
   console.log cmd, des
   if filecache[des] => clearTimeout filecache[des]
