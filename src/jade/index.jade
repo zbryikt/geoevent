@@ -23,9 +23,9 @@ html(lang="en")
         #demopanel(ng-app="0media.events",ng-controller="0media.events.main")
           #color.form-group
             span.pull-right
-              .btn.btn-primary.btn-sm(ng-click="setStyle('default')") 預設
-              .btn.btn-default.btn-sm(ng-click="setStyle('gray')") 亮灰
-              .btn.btn-success.btn-sm(ng-click="setStyle('green')") 淺綠
+              .btn.btn-primary.btn-sm(ng-click="setStyle('default')") Default
+              .btn.btn-default.btn-sm(ng-click="setStyle('gray')") Gray
+              .btn.btn-success.btn-sm(ng-click="setStyle('green')") Green
             #title.btn-sm.pull-left: strong 
               img(src="img/favicon.png")
               |  Events Visualization 
@@ -120,8 +120,13 @@ html(lang="en")
           textarea.form-control(ng-model="embedcode",rows="5")
           p or the direct link to the result page:
           input.form-control(ng-model="outurlwithhost",ng-disabled="true")
-
+          br
+          hr
+          br
           #footer
+            | For source code, please visit 
+            a(href="http://github.com/zbryikt/geoevent/") Github Repo
+            |  of the events visualization project.
 
     script.
       window.fbAsyncInit = function() {

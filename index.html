@@ -29,9 +29,9 @@
       <div id="layout">
         <div id="demopanel" ng-app="0media.events" ng-controller="0media.events.main">
           <div id="color" class="form-group"><span class="pull-right">
-              <div ng-click="setStyle('default')" class="btn btn-primary btn-sm">預設</div>
-              <div ng-click="setStyle('gray')" class="btn btn-default btn-sm">亮灰</div>
-              <div ng-click="setStyle('green')" class="btn btn-success btn-sm">淺綠</div></span>
+              <div ng-click="setStyle('default')" class="btn btn-primary btn-sm">Default</div>
+              <div ng-click="setStyle('gray')" class="btn btn-default btn-sm">Gray</div>
+              <div ng-click="setStyle('green')" class="btn btn-success btn-sm">Green</div></span>
             <div id="title" class="btn-sm pull-left"><strong><img src="img/favicon.png"> Events Visualization </strong></div>
             <div class="clearfix"></div>
           </div>
@@ -118,8 +118,9 @@
           <p>here is the html code for embedding this in websites:</p>
           <textarea ng-model="embedcode" rows="5" class="form-control"></textarea>
           <p>or the direct link to the result page:</p>
-          <input ng-model="outurlwithhost" ng-disabled="true" class="form-control">
-          <div id="footer"></div>
+          <input ng-model="outurlwithhost" ng-disabled="true" class="form-control"><br>
+          <hr><br>
+          <div id="footer">For source code, please visit <a href="http://github.com/zbryikt/geoevent/">Github Repo</a> of the events visualization project.</div>
         </div>
       </div>
     </div>
