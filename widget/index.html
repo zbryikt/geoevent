@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../index.js"></script>
     <script src="//maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places"></script>
   </head>
-  <body>
+  <body style="overflow:hidden">
     <div id="widget" ng-app="0media.events" ng-controller="0media.events.main">
       <div id="zm-event" ng-class="[style,loaded,dim.htype,dim.wtype]" class="default">
         <div class="dimmer"><img src="../img/spin.gif"><br><br>Preparing the timeline</div>
@@ -32,7 +32,12 @@
           <div class="timeline-inner">
             <div class="header">
               <div class="name">{{current.name}}</div>
-              <div class="casualty">{{current.casualty.die}}死 {{current.casualty.hurt}}傷</div>
+              <div class="casualty">
+                {{current.casualty.die}} 
+                death
+                <!-- {{current.casualty.hurt}} -->
+                <!--a -injured-->
+              </div>
             </div>
             <div class="background"></div>
             <div class="line-wrap">
@@ -60,12 +65,16 @@
         </div>
         <div onclick="window.location.href='http://zbryikt.github.io/geoevent/'" class="home-popover">build your own map!</div>
         <div class="infopanel">
-          <div class="pull-right"><i onclick="window.location.href='http://zbryikt.github.io/geoevent/'" class="glyphicon glyphicon-home"></i></div>
+          <div class="action pull-right"><a ng-attr-href="{{currentURL}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i></a></div>
           <div ng-cloak class="date pull-left">{{current.date}}</div>
-          <div ng-cloak class="title">{{current.name}}</div>
+          <div ng-cloak class="title">
+            <div class="vc">
+            </div>
+            <div class="ib">{{current.name}}</div>
+          </div>
           <div class="casualty pull-right">
-            <div ng-cloak class="c-die">{{current.casualty.die}}<small>死</small></div>
-            <div ng-cloak class="c-hurt">{{current.casualty.hurt}}<small>傷</small></div>
+            <div ng-cloak class="c-die">{{current.casualty.die}}<small>death</small></div>
+            <div ng-cloak class="c-hurt">{{current.casualty.hurt}}<small>injured</small></div>
           </div>
         </div>
       </div>

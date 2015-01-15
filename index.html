@@ -37,14 +37,16 @@
           </div>
           <div id="main">
             <div id="zm-event" ng-class="[style,loaded,dim.htype,dim.wtype]" class="default">
-              <div class="dimmer"><img src="img/spin.gif"><br><br>Preparing the timeline</div>
+              <div class="dimmer"><img src="../img/spin.gif"><br><br>Preparing the timeline</div>
               <div class="timeline">
                 <div class="timeline-inner">
                   <div class="header">
                     <div class="name">{{current.name}}</div>
                     <div class="casualty">
-                      {{current.casualty.die}}
+                      {{current.casualty.die}} 
                       death
+                      <!-- {{current.casualty.hurt}} -->
+                      <!--a -injured-->
                     </div>
                   </div>
                   <div class="background"></div>
@@ -71,8 +73,9 @@
               <div class="bubbles">
                 <div ng-repeat="event in events" ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}" ng-class="{'in':event.bubble.state==1,'out':event.bubble.state==2}" class="bubble"></div>
               </div>
+              <div onclick="window.location.href='http://zbryikt.github.io/geoevent/'" class="home-popover">build your own map!</div>
               <div class="infopanel">
-                <div class="pull-right"><i class="glyphicon glyphicon-share"></i></div>
+                <div class="action pull-right"><a ng-attr-href="{{currentURL}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i></a></div>
                 <div ng-cloak class="date pull-left">{{current.date}}</div>
                 <div ng-cloak class="title">
                   <div class="vc">
@@ -80,8 +83,8 @@
                   <div class="ib">{{current.name}}</div>
                 </div>
                 <div class="casualty pull-right">
-                  <div ng-cloak class="c-die">{{current.casualty.die}} <small>death</small></div>
-                  <div ng-cloak class="c-hurt">{{current.casualty.hurt}} <small>injured</small></div>
+                  <div ng-cloak class="c-die">{{current.casualty.die}}<small>death</small></div>
+                  <div ng-cloak class="c-hurt">{{current.casualty.hurt}}<small>injured</small></div>
                 </div>
               </div>
             </div>
@@ -138,7 +141,7 @@
             </div>
             <div class="form-group">
               <label>initial zoom level</label><br>
-              <select ng-options="v for v in zlvs" ng-model="initz" style="min-width:120px" class="form-control input-sm"></select>
+              <select ng-options="v for v in zlvs" ng-model="initz" style="min-width:120px" ng-disabled="autoll" class="form-control input-sm"></select>
             </div>
             <div class="form-group">
               <label>&nbsp;</label><br>

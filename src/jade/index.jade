@@ -30,54 +30,9 @@ html(lang="en")
               img(src="img/favicon.png")
               |  Events Visualization 
             .clearfix
-          #main: #zm-event.default(ng-class="[style,loaded,dim.htype,dim.wtype]")
-            .dimmer
-              img(src="img/spin.gif")
-              br
-              br
-              | Preparing the timeline
-            .timeline: .timeline-inner
-              .header
-                .name {{current.name}}
-                .casualty
-                  | {{current.casualty.die}}
-                  | death
-                  //- {{current.casualty.hurt}}
-                  //- injured
-              .background
-              .line-wrap: .line
-              .events: .events-inner(ng-attr-style="top:{{events.top}}px",ng-class="{'spd1':speed==1,'spd2':speed==2,'spd3':speed==3}")
-                .event(ng-repeat="event in events",
-                    ng-attr-style="top:{{event.top}}px;opacity:{{event.fadeout}}",
-                    ng-class="{'top':event.first}")
-                  .circle(ng-class="{'xl':event.casualty.total>2000,'lg':event.casualty.total<2000 && event.casualty.total>500}")
-                  .desc
-                    .data {{event.date}}
-                    .name(ng-attr-style="opacity:{{event.opacity}}") {{event.name}}
-            .ctrlpanel
-              i.glyphicon.glyphicon-fast-backward(ng-click="reset()")
-              i.glyphicon.glyphicon-play(ng-click="play()",ng-show="state==0")
-              i.glyphicon.glyphicon-pause(ng-click="pause()",ng-show="state!=0")
-              i.glyphicon.speed(ng-click="speeding()") {{speed}}X
-              .pull-right
-                i.glyphicon.glyphicon-chevron-up(ng-click="step(-1)",ng-class="{'active':dir==-1}")
-                i.glyphicon.glyphicon-chevron-down(ng-click="step(1)",ng-class="{'active':dir==1}")
-            .eventmap
-            .bubbles
-              .bubble(ng-repeat="event in events",ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}",ng-class="{'in':event.bubble.state==1,'out':event.bubble.state==2}") 
-            .infopanel
-              .pull-right: i.glyphicon.glyphicon-share
-              .date.pull-left(ng-cloak) {{current.date}}
-              .title(ng-cloak)
-                .vc: //- for vertical-align middle
-                .ib {{current.name}}
-              .casualty.pull-right
-                .c-die(ng-cloak)
-                  | {{current.casualty.die}} 
-                  small death
-                .c-hurt(ng-cloak)
-                  | {{current.casualty.hurt}} 
-                  small injured
+          #main
+            include widget.jade
+
         #description
           hr
           .fb-like.pull-right(data-share="false",data-show-faces="false",data-layout="button_count")
@@ -152,7 +107,7 @@ html(lang="en")
             .form-group
               label initial zoom level
               br
-              select.form-control.input-sm(ng-options="v for v in zlvs",ng-model="initz",style="min-width:120px")
+              select.form-control.input-sm(ng-options="v for v in zlvs",ng-model="initz",style="min-width:120px",ng-disabled="autoll")
             .form-group
               label &nbsp;
               br

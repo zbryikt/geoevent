@@ -2,6 +2,7 @@ angular.module \0media.events, <[]>
   ..controller \0media.events.main, <[$scope $interval $timeout $http 0media.events.map 0media.events.map-style]> ++ ($scope,$interval,$timeout,$http,map, map-style) ->
     $scope.style = \default
     mapnode = $('#zm-event .eventmap')
+    $scope.currentURL = window.location.href
     $scope.dim = {width: 0, height: 0, wtype: 'w-md', htype: 'h-md', timeline-height: 300}
     resize = -> $scope.$apply ->
       [w,h] = [mapnode.width!, mapnode.height!]

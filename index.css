@@ -307,6 +307,9 @@ html, body {
   user-select: none; }
   #zm-event .infopanel .glyphicon {
     cursor: pointer; }
+  #zm-event .infopanel .action {
+    position: relative;
+    z-index: 13; }
 #zm-event .infopanel .title {
   position: absolute;
   left: 0;
@@ -404,7 +407,7 @@ html, body {
   background: #fff;
   padding: 1px 7px;
   border-radius: 3px;
-  z-index: 13;
+  z-index: 14;
   font-size: 14px;
   cursor: pointer;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); }
@@ -609,6 +612,8 @@ html, body {
   background: rgba(255, 255, 255, 0.9);
   color: #444;
   text-shadow: none; }
+  #zm-event.gray .infopanel .action a {
+    color: #999; }
 #zm-event.gray .ctrlpanel {
   background: rgba(255, 255, 255, 0.9);
   color: #444; }
@@ -667,6 +672,8 @@ html, body {
 #zm-event.green .infopanel {
   background: #0ea688;
   color: #fff; }
+  #zm-event.green .infopanel .action a {
+    color: #ff9; }
 #zm-event.green .ctrlpanel {
   background: rgba(14, 166, 136, 0.9);
   color: #fff; }
