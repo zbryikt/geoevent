@@ -74,7 +74,7 @@ angular.module \0media.events, <[]>
           dateFull = new Date(date)
           m = dateFull.getMonth! + 1
           date = (dateFull.getYear! + 1900) + "/" + (if m < 10 => "0" else "") + m
-          casualty = {die: parseInt(it.gsx$death.$t), hurt: parseInt(it.gsx$wounded.$t)}
+          casualty = {die: parseInt(it.gsx$death.$t or 0), hurt: parseInt(it.gsx$wounded.$t or 0)}
           casualty.total = casualty.die + casualty.hurt
           casualty.radius = parseInt( Math.sqrt(casualty.total ) ) * 3 + 10
           lat = parseFloat(it['gsx$latitude']$t or 0)

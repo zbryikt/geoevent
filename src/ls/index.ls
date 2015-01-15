@@ -33,7 +33,7 @@ angular.module \main, <[0media.events]>
       src: \1yY4pqGqI3rLMf5bQqe5XMztnnJ78RMUrfh-XpJdhd_o
       color: \default
       ratio: 20
-      clat: 24.862211
-      clng: 75.148265
+      clat: 12.573404
+      clng: -15.193685
       initz: 1
 
