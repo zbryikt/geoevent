@@ -42,7 +42,7 @@ html(lang="en")
 
         .ctrlpanel
           i.glyphicon.glyphicon-fast-backward(ng-click="reset()")
-          i.glyphicon.glyphicon-play(ng-click="play()",ng-show="state!=1")
+          i.glyphicon.glyphicon-play(ng-click="play()",ng-show="state==0")
           i.glyphicon.glyphicon-pause(ng-click="pause()",ng-show="state!=0")
           i.glyphicon.speed(ng-click="speeding()") {{speed}}X
           .pull-right

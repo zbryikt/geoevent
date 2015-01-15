@@ -61,7 +61,7 @@
                   </div>
                 </div>
               </div>
-              <div class="ctrlpanel"><i ng-click="reset()" class="glyphicon glyphicon-fast-backward"></i><i ng-click="play()" ng-show="state!=1" class="glyphicon glyphicon-play"></i><i ng-click="pause()" ng-show="state!=0" class="glyphicon glyphicon-pause"></i><i ng-click="speeding()" class="glyphicon speed">{{speed}}X</i>
+              <div class="ctrlpanel"><i ng-click="reset()" class="glyphicon glyphicon-fast-backward"></i><i ng-click="play()" ng-show="state==0" class="glyphicon glyphicon-play"></i><i ng-click="pause()" ng-show="state!=0" class="glyphicon glyphicon-pause"></i><i ng-click="speeding()" class="glyphicon speed">{{speed}}X</i>
                 <div class="pull-right"><i ng-click="step(-1)" ng-class="{'active':dir==-1}" class="glyphicon glyphicon-chevron-up"></i><i ng-click="step(1)" ng-class="{'active':dir==1}" class="glyphicon glyphicon-chevron-down"></i></div>
               </div>
               <div class="eventmap"></div>
