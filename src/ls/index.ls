@@ -29,3 +29,11 @@ angular.module \main, <[0media.events]>
       ret = /\/d\/([^\/]+)/.exec $scope.datasrc
       if !ret => $scope.sid = null
       else $scope.sid = ret.1
+    $scope.config = do
+      src: \1yY4pqGqI3rLMf5bQqe5XMztnnJ78RMUrfh-XpJdhd_o
+      color: \default
+      ratio: 20
+      clat: 24.862211
+      clng: 75.148265
+      initz: 1
+

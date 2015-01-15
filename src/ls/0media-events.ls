@@ -60,6 +60,8 @@ angular.module \0media.events, <[]>
       ((window.location.search or "").split(\?).filter(->it).0 or "").split \& .map -> 
         ret = it.split \=
         config[ret.0] = ret.1
+      # TODO find a better approach
+      if $scope.$parent.config => config <<< $scope.$parent.config
          
       $http do
         url: "https://spreadsheets.google.com/feeds/list/#{config.src}/1/public/values?alt=json"
