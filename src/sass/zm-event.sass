@@ -173,6 +173,20 @@
       cursor: pointer
 
   .infopanel
+    .title
+      position: absolute
+      left: 0
+      padding: 0 120px 0 75px
+      width: 100%
+      white-space: no-wrap
+      .vc
+        display: inline-block
+        vertical-align: middle
+        height: 40px
+      .ib
+        display: inline-block
+        white-space: pre-wrap
+        line-height: 19px
     .date, .title, .casualty, .c-hurt, .c-die
       display: inline-block
     .casualty
@@ -181,6 +195,18 @@
       font-size: 0.8em
       min-width: 60px
       text-align: right
+    //- move to media query part if needed
+    .casualty
+      display: inline-block
+      line-height: 16px
+      font-size: 12px
+      padding: 4px 0
+      & > div
+        display: block
+      small
+        display: inline-block
+        @include transform(scale(0.8))
+        width: 45px
 
   .bubble
     width: 0
@@ -274,6 +300,12 @@
     bottom: 50px
     width: 170px
     left: 10px
+  .infopanel 
+    .title
+      font-size: 0.8em
+    .date
+      font-size: 12px
+
   .events
     margin-top: 10px
   .line-wrap
@@ -300,15 +332,6 @@
   padding-bottom: 70px
   .infopanel
     margin-top: 30px
-    .casualty
-      display: inline-block
-      line-height: 16px
-      font-size: 12px
-      padding: 4px 0
-      & > div
-        display: block
-    .date
-      font-size: 12px
     // move date and casualty to the top if need
       .casualty, .date
         position: absolute

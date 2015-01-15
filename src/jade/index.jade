@@ -39,7 +39,11 @@ html(lang="en")
             .timeline: .timeline-inner
               .header
                 .name {{current.name}}
-                .casualty {{current.casualty.die}}死 {{current.casualty.hurt}}傷
+                .casualty
+                  | {{current.casualty.die}}
+                  | death
+                  //- {{current.casualty.hurt}}
+                  //- injured
               .background
               .line-wrap: .line
               .events: .events-inner(ng-attr-style="top:{{events.top}}px",ng-class="{'spd1':speed==1,'spd2':speed==2,'spd3':speed==3}")
@@ -64,14 +68,16 @@ html(lang="en")
             .infopanel
               .pull-right: i.glyphicon.glyphicon-share
               .date.pull-left(ng-cloak) {{current.date}}
-              .title(ng-cloak) {{current.name}}
+              .title(ng-cloak)
+                .vc: //- for vertical-align middle
+                .ib {{current.name}}
               .casualty.pull-right
                 .c-die(ng-cloak)
-                  | {{current.casualty.die}}
-                  small 死
+                  | {{current.casualty.die}} 
+                  small death
                 .c-hurt(ng-cloak)
-                  | {{current.casualty.hurt}}
-                  small 傷
+                  | {{current.casualty.hurt}} 
+                  small injured
         #description
           hr
           .fb-like.pull-right(data-share="false",data-show-faces="false",data-layout="button_count")

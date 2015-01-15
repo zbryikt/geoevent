@@ -21,11 +21,11 @@ angular.module \0media.events
         bound-ptrs.map(-> new google.maps.LatLng it.0, it.1)map(->map-bound.extend it)
       simdate = (date) -> date.getYear! + 1900
 
-
       map = new google.maps.Map node, map-option
-      map.fitBounds map-bound
+      if map-bound => map.fitBounds map-bound
 
       google.maps.event.addDomListener window, 'resize', ->
+        if !map-bound => map-bound := map.getBounds!
         [w,h] = [$(node).width!, $(node).height!]
         map.fitBounds map-bound
         b = map.getBounds!

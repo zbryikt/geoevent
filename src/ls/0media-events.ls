@@ -67,7 +67,6 @@ angular.module \0media.events, <[]>
         url: "https://spreadsheets.google.com/feeds/list/#{config.src}/1/public/values?alt=json"
         method: \GET
       .success (d) -> 
-        console.log d
         data = d.feed.entry.map ->
           date = it['gsx$date']$t.replace /[年月]/g, '/'
           date = date.replace /[日]/g, ''

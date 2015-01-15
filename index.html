@@ -42,7 +42,10 @@
                 <div class="timeline-inner">
                   <div class="header">
                     <div class="name">{{current.name}}</div>
-                    <div class="casualty">{{current.casualty.die}}死 {{current.casualty.hurt}}傷</div>
+                    <div class="casualty">
+                      {{current.casualty.die}}
+                      death
+                    </div>
                   </div>
                   <div class="background"></div>
                   <div class="line-wrap">
@@ -71,10 +74,14 @@
               <div class="infopanel">
                 <div class="pull-right"><i class="glyphicon glyphicon-share"></i></div>
                 <div ng-cloak class="date pull-left">{{current.date}}</div>
-                <div ng-cloak class="title">{{current.name}}</div>
+                <div ng-cloak class="title">
+                  <div class="vc">
+                  </div>
+                  <div class="ib">{{current.name}}</div>
+                </div>
                 <div class="casualty pull-right">
-                  <div ng-cloak class="c-die">{{current.casualty.die}}<small>死</small></div>
-                  <div ng-cloak class="c-hurt">{{current.casualty.hurt}}<small>傷</small></div>
+                  <div ng-cloak class="c-die">{{current.casualty.die}} <small>death</small></div>
+                  <div ng-cloak class="c-hurt">{{current.casualty.hurt}} <small>injured</small></div>
                 </div>
               </div>
             </div>

@@ -307,6 +307,20 @@ html, body {
   user-select: none; }
   #zm-event .infopanel .glyphicon {
     cursor: pointer; }
+#zm-event .infopanel .title {
+  position: absolute;
+  left: 0;
+  padding: 0 120px 0 75px;
+  width: 100%;
+  white-space: no-wrap; }
+  #zm-event .infopanel .title .vc {
+    display: inline-block;
+    vertical-align: middle;
+    height: 40px; }
+  #zm-event .infopanel .title .ib {
+    display: inline-block;
+    white-space: pre-wrap;
+    line-height: 19px; }
 #zm-event .infopanel .date, #zm-event .infopanel .title, #zm-event .infopanel .casualty, #zm-event .infopanel .c-hurt, #zm-event .infopanel .c-die {
   display: inline-block; }
 #zm-event .infopanel .casualty {
@@ -315,6 +329,21 @@ html, body {
   font-size: 0.8em;
   min-width: 60px;
   text-align: right; }
+#zm-event .infopanel .casualty {
+  display: inline-block;
+  line-height: 16px;
+  font-size: 12px;
+  padding: 4px 0; }
+  #zm-event .infopanel .casualty > div {
+    display: block; }
+  #zm-event .infopanel .casualty small {
+    display: inline-block;
+    -ms-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    transform: scale(0.8);
+    width: 45px; }
 #zm-event .bubble {
   width: 0;
   height: 0;
@@ -437,6 +466,10 @@ html, body {
   bottom: 50px;
   width: 170px;
   left: 10px; }
+#zm-event.w-mc .infopanel .title {
+  font-size: 0.8em; }
+#zm-event.w-mc .infopanel .date {
+  font-size: 12px; }
 #zm-event.w-mc .events {
   margin-top: 10px; }
 #zm-event.w-mc .line-wrap {
@@ -466,6 +499,10 @@ html, body {
   bottom: 50px;
   width: 170px;
   left: 10px; }
+#zm-event.w-xs .infopanel .title {
+  font-size: 0.8em; }
+#zm-event.w-xs .infopanel .date {
+  font-size: 12px; }
 #zm-event.w-xs .events {
   margin-top: 10px; }
 #zm-event.w-xs .line-wrap {
@@ -491,15 +528,6 @@ html, body {
   padding-bottom: 70px; }
   #zm-event.w-mc .infopanel {
     margin-top: 30px; }
-    #zm-event.w-mc .infopanel .casualty {
-      display: inline-block;
-      line-height: 16px;
-      font-size: 12px;
-      padding: 4px 0; }
-      #zm-event.w-mc .infopanel .casualty > div {
-        display: block; }
-    #zm-event.w-mc .infopanel .date {
-      font-size: 12px; }
   #zm-event.w-mc .ctrlpanel {
     border-radius: 5px;
     top: initial;
