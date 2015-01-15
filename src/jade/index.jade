@@ -76,24 +76,46 @@ html(lang="en")
           hr
           .fb-like.pull-right(data-share="false",data-show-faces="false",data-layout="button_count")
           h2 Events Visualization
-          p This tool helps you visualize events across time, using bubble to show the magnitude of specific event.
+          p This tool helps you visualize events across time and space with bubbles of magnitude of events, and works on devices with different screen size.
           hr
           h3 How to Use
-          p You need to put the event data in google spreadsheet formatted like this one:
-          iframe#sample-doc(src="https://docs.google.com/spreadsheets/d/1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo/pubhtml?widget=true&amp;headers=false")
+          p prepare the event data in a google spreadsheet formatted like this:
+          iframe#sample-doc(src="https://docs.google.com/spreadsheets/d/1yY4pqGqI3rLMf5bQqe5XMztnnJ78RMUrfh-XpJdhd_o/pubhtml?widget=true&amp;headers=false")
           br
           br
           p 
-            | Then, in the menu bar of the desired spreadsheet, click 
-            em Menu  
+            | 7 columns are required in following order: date, event, shortname, death, wounded, latitude, longitude:
+            ul
+              li 
+                em date
+                | : Event date. YYYY/MM/DD or MM/DD/YYYY
+              li 
+                em event
+                | : Event name. shown in timeline only if shortname is omitted
+              li
+                em shortname
+                | : short name of event for showing in timeline
+              li 
+                em death
+                | : number of death
+              li 
+                em wounded
+                | : number of wounded
+              li 
+                em latitude  
+                | and 
+                em longitude
+                | : coordinate of the event 
+          p 
+            | and publish the spreadsheet by clicking 
+            em "Menu"  
             | &#xbb; 
-            em Publish to the Web 
+            em "Publish to the Web" 
             | &#xbb;  
-            em Publish
-            | to make it public to anyone.
+            em "Publish"
           p 
             | Copy &amp; paste the link of the spreadsheet in this input box:
-          .form-group
+          .form-group(ng-class="{'has-error':sid==null && datasrc}")
             input.form-control(
               placeholder="e.g., https://docs.google.com/spreadsheets/d/1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo/pubhtml",
               ng-model="datasrc")
@@ -113,14 +135,30 @@ html(lang="en")
                 .btn.btn-default.btn-sm(ng-click="setRatio(1)",ng-class="{'active':ratio==1}") Small
                 .btn.btn-info.btn-sm(ng-click="setRatio(5)",ng-class="{'active':ratio==5}") Medium
                 .btn.btn-primary.btn-sm(ng-click="setRatio(20)",ng-class="{'active':ratio==20}") Large
+            .form-group
+              label
+                | central latlng &nbsp; 
+                input(type="checkbox",checked,ng-model="autoll")
+                small  auto
+              br
+              input.form-control.input-sm(style="max-width:90px",ng-model="clat",placeholder="latitude",ng-disabled="autoll")
+              input.form-control.input-sm(style="max-width:90px",ng-model="clng",placeholder="longitude",ng-disabled="autoll")
+            .form-group
+              label initial zoom level
+              br
+              select.form-control.input-sm(ng-options="v for v in zlvs",ng-model="initz",style="min-width:120px")
+            .form-group
+              label &nbsp;
+              br
+              .btn.btn-danger.btn-sm(ng-click="generate()") Generate
           br
-          p sample output will be like this:
-          iframe#result(ng-attr-src="{{outurlwithhost}}")
-          p here is the html code for embedding this in websites:
+          p result looks like this:
+          iframe#result
+          p html code for embedding in your websites:
           textarea.form-control(ng-model="embedcode",rows="5")
           br
           p 
-            | or the direct link to the result page: ( 
+            | direct link to the result page: ( 
             a(ng-attr-href="{{outurlwithhost}}",target="_blank") open in new tab
             |  )
           input.form-control(ng-model="outurlwithhost",ng-disabled="true")

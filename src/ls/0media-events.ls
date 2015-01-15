@@ -26,7 +26,6 @@ angular.module \0media.events, <[]>
 
       draw: (overlay, map) ->
         z = Math.pow(2, map.getZoom! - 6)
-        console.log z
         $scope.events.map (event, i) ->
           event <<< overlay.ll2p(event.lat, event.lng){x,y}
           event.rate = z
@@ -57,7 +56,7 @@ angular.module \0media.events, <[]>
     $scope.dir = 1
     $scope.loaded = 'loading'
     $scope.initData = ->
-      config = {src: \1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo, color: \default,ratio: 1}
+      config = {src: \1yY4pqGqI3rLMf5bQqe5XMztnnJ78RMUrfh-XpJdhd_o, color: \default,ratio: 1}
       ((window.location.search or "").split(\?).filter(->it).0 or "").split \& .map -> 
         ret = it.split \=
         config[ret.0] = ret.1
@@ -83,8 +82,8 @@ angular.module \0media.events, <[]>
           ret = {name, dateFull, casualty, lat, lng, loc, date}
           ret
         data = data.filter -> it.lat and it.lng and it.casualty.total
-        lats = data.map(->it.lat)sort!
-        lngs = data.map(->it.lng)sort!
+        lats = data.map(->parseFloat it.lat)sort (a,b) -> a - b
+        lngs = data.map(->parseFloat it.lng)sort (a,b) -> a - b
         # TODO fallback to JS animation for browsers not supporting CSS3 transition
         # Currently not used.
         step-js-animation = ->
@@ -161,7 +160,7 @@ angular.module \0media.events, <[]>
         $timeout step-transition, 0
         $scope.events = data
         $scope.reset!
-        $scope.map = map.init mapnode.0, [lats.0, lats[* - 1]], [lngs.0, lngs[* - 1]], resize, overlay-adapter
+        $scope.map = map.init mapnode.0, [lats.0, lats[* - 1]], [lngs.0, lngs[* - 1]], resize, overlay-adapter, config
         $scope.set-style config.color
         $scope.loaded = ''
         setTimeout resize, 0

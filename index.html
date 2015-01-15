@@ -84,14 +84,24 @@
           <hr>
           <div data-share="false" data-show-faces="false" data-layout="button_count" class="fb-like pull-right"></div>
           <h2>Events Visualization</h2>
-          <p>This tool helps you visualize events across time, using bubble to show the magnitude of specific event.</p>
+          <p>This tool helps you visualize events across time and space with bubbles of magnitude of events, and works on devices with different screen size.</p>
           <hr>
           <h3>How to Use</h3>
-          <p>You need to put the event data in google spreadsheet formatted like this one:</p>
-          <iframe id="sample-doc" src="https://docs.google.com/spreadsheets/d/1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo/pubhtml?widget=true&amp;amp;headers=false"></iframe><br><br>
-          <p>Then, in the menu bar of the desired spreadsheet, click <em>Menu  </em>&#xbb; <em>Publish to the Web </em>&#xbb;  <em>Publish</em>to make it public to anyone.</p>
+          <p>prepare the event data in a google spreadsheet formatted like this:</p>
+          <iframe id="sample-doc" src="https://docs.google.com/spreadsheets/d/1yY4pqGqI3rLMf5bQqe5XMztnnJ78RMUrfh-XpJdhd_o/pubhtml?widget=true&amp;amp;headers=false"></iframe><br><br>
+          <p>7 columns are required in following order: date, event, shortname, death, wounded, latitude, longitude:
+            <ul>
+              <li><em>date</em>: Event date. YYYY/MM/DD or MM/DD/YYYY</li>
+              <li><em>event</em>: Event name. shown in timeline only if shortname is omitted</li>
+              <li><em>shortname</em>: short name of event for showing in timeline</li>
+              <li><em>death</em>: number of death</li>
+              <li><em>wounded</em>: number of wounded</li>
+              <li><em>latitude  </em>and <em>longitude</em>: coordinate of the event </li>
+            </ul>
+          </p>
+          <p>and publish the spreadsheet by clicking <em>"Menu"  </em>&#xbb; <em>"Publish to the Web" </em>&#xbb;  <em>"Publish"</em></p>
           <p>Copy &amp; paste the link of the spreadsheet in this input box:</p>
-          <div class="form-group">
+          <div ng-class="{'has-error':sid==null &amp;&amp; datasrc}" class="form-group">
             <input placeholder="e.g., https://docs.google.com/spreadsheets/d/1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo/pubhtml" ng-model="datasrc" class="form-control">
           </div>
           <p>and setup following configuration:</p>
@@ -112,12 +122,27 @@
                 <div ng-click="setRatio(20)" ng-class="{'active':ratio==20}" class="btn btn-primary btn-sm">Large</div>
               </div>
             </div>
+            <div class="form-group">
+              <label>central latlng &nbsp; 
+                <input type="checkbox" checked ng-model="autoll"><small> auto</small>
+              </label><br>
+              <input style="max-width:90px" ng-model="clat" placeholder="latitude" ng-disabled="autoll" class="form-control input-sm">
+              <input style="max-width:90px" ng-model="clng" placeholder="longitude" ng-disabled="autoll" class="form-control input-sm">
+            </div>
+            <div class="form-group">
+              <label>initial zoom level</label><br>
+              <select ng-options="v for v in zlvs" ng-model="initz" style="min-width:120px" class="form-control input-sm"></select>
+            </div>
+            <div class="form-group">
+              <label>&nbsp;</label><br>
+              <div ng-click="generate()" class="btn btn-danger btn-sm">Generate</div>
+            </div>
           </div><br>
-          <p>sample output will be like this:</p>
-          <iframe id="result" ng-attr-src="{{outurlwithhost}}"></iframe>
-          <p>here is the html code for embedding this in websites:</p>
+          <p>result looks like this:</p>
+          <iframe id="result"></iframe>
+          <p>html code for embedding in your websites:</p>
           <textarea ng-model="embedcode" rows="5" class="form-control"></textarea><br>
-          <p>or the direct link to the result page: ( <a ng-attr-href="{{outurlwithhost}}" target="_blank">open in new tab</a> )</p>
+          <p>direct link to the result page: ( <a ng-attr-href="{{outurlwithhost}}" target="_blank">open in new tab</a> )</p>
           <input ng-model="outurlwithhost" ng-disabled="true" class="form-control"><br>
           <hr><br>
           <div id="footer">For source code, please visit <a href="http://github.com/zbryikt/geoevent/">Github Repo</a> of the events visualization project.</div>

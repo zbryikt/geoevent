@@ -116,7 +116,13 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 220px; }
+  width: 220px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
 #zm-event .timeline-inner {
   position: relative;
   border-radius: 5px;
