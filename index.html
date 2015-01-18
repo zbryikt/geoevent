@@ -75,6 +75,7 @@
                 <div ng-repeat="event in events" ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}" ng-class="{'in':event.bubble.state==1,'out':event.bubble.state==2}" class="bubble"></div>
               </div>
               <div class="infopanel">
+                <div class="action pull-right"><a ng-attr-href="{{currentURL}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i></a></div>
                 <div ng-cloak class="date pull-left">{{current.date}}</div>
                 <div ng-cloak class="title">
                   <div class="vc">

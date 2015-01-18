@@ -39,8 +39,7 @@
   if !demo
     .home-popover(onclick="window.location.href='http://0media.tw/t/geoevent/'") build your own map!
   .infopanel
-    if !demo
-      .action.pull-right: a(ng-attr-href="{{currentURL}}",target="_blank"): i.glyphicon.glyphicon-new-window
+    .action.pull-right: a(ng-attr-href="{{currentURL}}",target="_blank"): i.glyphicon.glyphicon-new-window
     .date.pull-left(ng-cloak) {{current.date}}
     .title(ng-cloak)
       .vc: //- for vertical-align middle
