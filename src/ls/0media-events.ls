@@ -2,7 +2,6 @@ angular.module \0media.events, <[]>
   ..controller \0media.events.main, <[$scope $interval $timeout $http 0media.events.map 0media.events.map-style]> ++ ($scope,$interval,$timeout,$http,map, map-style) ->
     $scope.style = \default
     mapnode = $('#zm-event .eventmap')
-    $scope.currentURL = window.location.href
     $scope.dim = {width: 0, height: 0, wtype: 'w-md', htype: 'h-md', timeline-height: 300}
     resize = -> $scope.$apply ->
       [w,h] = [mapnode.width!, mapnode.height!]
@@ -63,6 +62,8 @@ angular.module \0media.events, <[]>
         config[ret.0] = ret.1
       # TODO find a better approach
       if $scope.$parent.config => config <<< $scope.$parent.config
+      if config.currentURL => $scope.currentURL = config.currentURL
+      else => $scope.currentURL = "http://0media.tw/t/geoevent/?" + ["#k=#{encodeURIComponent(v)}" for k,v of config].join(\&)
          
       # first request, get spreadsheet title
       (d) <- $http do
