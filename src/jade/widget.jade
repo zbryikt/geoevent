@@ -1,5 +1,6 @@
 //-#widget(ng-app="0media.events",ng-controller="0media.events.main")
 #zm-event.default(ng-class="[style,loaded,dim.htype,dim.wtype]")
+  .main-title(ng-cloak) {{title}}
   .dimmer
     img(src="img/spin.gif")
     br
@@ -7,8 +8,8 @@
     | Preparing the timeline
   .timeline: .timeline-inner
     .header
-      .name {{current.name}}
-      .casualty
+      .name(ng-cloak) {{current.name}}
+      .casualty(ng-cloak)
         | {{current.casualty.die}} 
         | death
         // {{current.casualty.hurt}} 
@@ -20,7 +21,7 @@
           ng-attr-style="top:{{event.top}}px;opacity:{{event.fadeout}}",
           ng-class="{'top':event.first}")
         .circle(ng-class="{'xl':event.casualty.total>2000,'lg':event.casualty.total<2000 && event.casualty.total>500}")
-        .desc
+        .desc(ng-cloak)
           .data {{event.date}}
           .name(ng-attr-style="opacity:{{event.opacity}}") {{event.name}}
 
@@ -28,16 +29,18 @@
     i.glyphicon.glyphicon-fast-backward(ng-click="reset()")
     i.glyphicon.glyphicon-play(ng-click="play()",ng-show="state==0")
     i.glyphicon.glyphicon-pause(ng-click="pause()",ng-show="state!=0")
-    i.glyphicon.speed(ng-click="speeding()") {{speed}}X
+    i.glyphicon.speed(ng-click="speeding()",ng-cloak) {{speed}}X
     .pull-right
       i.glyphicon.glyphicon-chevron-up(ng-click="step(-1)",ng-class="{'active':dir==-1}")
       i.glyphicon.glyphicon-chevron-down(ng-click="step(1)",ng-class="{'active':dir==1}")
   .eventmap
   .bubbles
     .bubble(ng-repeat="event in events",ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}",ng-class="{'in':event.bubble.state==1,'out':event.bubble.state==2}") 
-  .home-popover(onclick="window.location.href='http://zbryikt.github.io/geoevent/'") build your own map!
+  if !demo
+    .home-popover(onclick="window.location.href='http://0media.tw/t/geoevent/'") build your own map!
   .infopanel
-    .action.pull-right: a(ng-attr-href="{{currentURL}}",target="_blank"): i.glyphicon.glyphicon-new-window
+    if !demo
+      .action.pull-right: a(ng-attr-href="{{currentURL}}",target="_blank"): i.glyphicon.glyphicon-new-window
     .date.pull-left(ng-cloak) {{current.date}}
     .title(ng-cloak)
       .vc: //- for vertical-align middle
@@ -49,4 +52,3 @@
       .c-hurt(ng-cloak)
         | {{current.casualty.hurt}}
         small injured
-

@@ -109,9 +109,17 @@ html, body {
   width: 100%;
   height: 100%;
   z-index: 1; }
+#zm-event .main-title {
+  position: absolute;
+  z-index: 14;
+  top: 2px;
+  left: 0;
+  width: 100%;
+  padding: 2px 8px;
+  text-align: center; }
 #zm-event .timeline {
   height: 100%;
-  padding: 20px 0 70px 20px;
+  padding: 30px 0 70px 20px;
   z-index: 4;
   position: absolute;
   top: 0;
@@ -374,6 +382,10 @@ html, body {
     -o-transition: width 1s ease-out, height 1s ease-out, opacity 2s ease-out;
     transition: width 1s ease-out, height 1s ease-out, opacity 2s ease-out; }
 #zm-event .dimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 16;
   display: none;
   background: gray url(img/blurmap.jpg) center center no-repeat;
   background-size: cover;
@@ -407,7 +419,7 @@ html, body {
   background: #fff;
   padding: 1px 7px;
   border-radius: 3px;
-  z-index: 14;
+  z-index: 15;
   font-size: 14px;
   cursor: pointer;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); }
@@ -463,6 +475,8 @@ html, body {
 
 #zm-event.w-mc .home-popover {
   font-size: 12px; }
+#zm-event.w-mc .main-title {
+  font-size: 12px; }
 #zm-event.w-mc .ctrlpanel {
   border-radius: 5px;
   top: initial;
@@ -495,6 +509,8 @@ html, body {
   font-weight: 900; }
 
 #zm-event.w-xs .home-popover {
+  font-size: 12px; }
+#zm-event.w-xs .main-title {
   font-size: 12px; }
 #zm-event.w-xs .ctrlpanel {
   border-radius: 5px;
@@ -556,6 +572,9 @@ html, body {
 #zm-event.default .bubble {
   background: rgba(255, 128, 64, 0.3);
   border: 4px solid red; }
+#zm-event.default .main-title {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5); }
 #zm-event.default .infopanel {
   background: #2d3240;
   color: #eee; }

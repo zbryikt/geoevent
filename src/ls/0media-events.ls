@@ -64,10 +64,18 @@ angular.module \0media.events, <[]>
       # TODO find a better approach
       if $scope.$parent.config => config <<< $scope.$parent.config
          
+      # first request, get spreadsheet title
+      (d) <- $http do
+        url: "https://spreadsheets.google.com/feeds/worksheets/#{config.src}/public/full?alt=json"
+        method: \GET
+      .success
+      $scope.title = d.feed.title.$t
+      # second request, get workbook content
       $http do
         url: "https://spreadsheets.google.com/feeds/list/#{config.src}/1/public/values?alt=json"
         method: \GET
       .success (d) -> 
+        console.log d
         data = d.feed.entry.map ->
           date = it['gsx$date']$t.replace /[年月]/g, '/'
           date = date.replace /[日]/g, ''

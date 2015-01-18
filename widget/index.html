@@ -6,11 +6,11 @@
     <title>Events Visualization</title>
     <!-- libraries-->
     <meta property="og:locale" content="zh_TW">
-    <meta property="og:image" content="http://zbryikt.github.io/visualize/disaster/img/thumbnail.png">
+    <meta property="og:image" content="http://0media.tw/t/geoevent/img/thumbnail.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="200">
     <meta property="og:image:height" content="200">
-    <meta property="og:url" content="http://zbryikt.github.io/geoevent/">
+    <meta property="og:url" content="http://0media.tw/t/geoevent/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Events Visualization">
     <meta property="og:description" content="This tool helps you visualize events across time, using bubble to show the magnitude of specific event.">
@@ -27,12 +27,13 @@
   <body style="overflow:hidden">
     <div id="widget" ng-app="0media.events" ng-controller="0media.events.main">
       <div id="zm-event" ng-class="[style,loaded,dim.htype,dim.wtype]" class="default">
+        <div ng-cloak class="main-title">{{title}}</div>
         <div class="dimmer"><img src="img/spin.gif"><br><br>Preparing the timeline</div>
         <div class="timeline">
           <div class="timeline-inner">
             <div class="header">
-              <div class="name">{{current.name}}</div>
-              <div class="casualty">
+              <div ng-cloak class="name">{{current.name}}</div>
+              <div ng-cloak class="casualty">
                 {{current.casualty.die}} 
                 death
                 <!-- {{current.casualty.hurt}} -->
@@ -47,7 +48,7 @@
               <div ng-attr-style="top:{{events.top}}px" ng-class="{'spd1':speed==1,'spd2':speed==2,'spd3':speed==3}" class="events-inner">
                 <div ng-repeat="event in events" ng-attr-style="top:{{event.top}}px;opacity:{{event.fadeout}}" ng-class="{'top':event.first}" class="event">
                   <div ng-class="{'xl':event.casualty.total&gt;2000,'lg':event.casualty.total&lt;2000 &amp;&amp; event.casualty.total&gt;500}" class="circle"></div>
-                  <div class="desc">
+                  <div ng-cloak class="desc">
                     <div class="data">{{event.date}}</div>
                     <div ng-attr-style="opacity:{{event.opacity}}" class="name">{{event.name}}</div>
                   </div>
@@ -56,14 +57,14 @@
             </div>
           </div>
         </div>
-        <div class="ctrlpanel"><i ng-click="reset()" class="glyphicon glyphicon-fast-backward"></i><i ng-click="play()" ng-show="state==0" class="glyphicon glyphicon-play"></i><i ng-click="pause()" ng-show="state!=0" class="glyphicon glyphicon-pause"></i><i ng-click="speeding()" class="glyphicon speed">{{speed}}X</i>
+        <div class="ctrlpanel"><i ng-click="reset()" class="glyphicon glyphicon-fast-backward"></i><i ng-click="play()" ng-show="state==0" class="glyphicon glyphicon-play"></i><i ng-click="pause()" ng-show="state!=0" class="glyphicon glyphicon-pause"></i><i ng-click="speeding()" ng-cloak class="glyphicon speed">{{speed}}X</i>
           <div class="pull-right"><i ng-click="step(-1)" ng-class="{'active':dir==-1}" class="glyphicon glyphicon-chevron-up"></i><i ng-click="step(1)" ng-class="{'active':dir==1}" class="glyphicon glyphicon-chevron-down"></i></div>
         </div>
         <div class="eventmap"></div>
         <div class="bubbles">
           <div ng-repeat="event in events" ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}" ng-class="{'in':event.bubble.state==1,'out':event.bubble.state==2}" class="bubble"></div>
         </div>
-        <div onclick="window.location.href='http://zbryikt.github.io/geoevent/'" class="home-popover">build your own map!</div>
+        <div onclick="window.location.href='http://0media.tw/t/geoevent/'" class="home-popover">build your own map!</div>
         <div class="infopanel">
           <div class="action pull-right"><a ng-attr-href="{{currentURL}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i></a></div>
           <div ng-cloak class="date pull-left">{{current.date}}</div>

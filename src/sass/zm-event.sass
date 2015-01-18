@@ -12,9 +12,17 @@
     width: 100%
     height: 100%
     z-index: index($order, eventmap)
+  .main-title
+    position: absolute
+    z-index: index($order, main-title)
+    top: 2px
+    left: 0
+    width: 100%
+    padding: 2px 8px
+    text-align: center
   .timeline
     height: 100%
-    padding: 20px 0 70px 20px
+    padding: 30px 0 70px 20px
     z-index: index($order, timeline)
     position: absolute
     top: 0
@@ -225,6 +233,10 @@
     &.out
       @include transition(width 1s ease-out, height 1s ease-out, opacity 2s ease-out)
   .dimmer
+    position: absolute
+    top: 0
+    left: 0
+    z-index: index($order, dimmer)
     display: none
     background: rgba(128,128,128,1) url(img/blurmap.jpg) center center no-repeat
     background-size: cover
@@ -295,6 +307,8 @@
 
 @include dim-max(w,xs,#zm-event)
   .home-popover
+    font-size: 12px
+  .main-title
     font-size: 12px
   .ctrlpanel
     border-radius: 5px

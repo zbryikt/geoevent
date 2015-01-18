@@ -1,7 +1,7 @@
 angular.module \main, <[0media.events]>
   ..controller \main, <[$scope $timeout]> ++ ($scope,$timeout) ->
-    #host = "http://0media.tw/t/geoevent"
-    host = "http://zbryikt.github.io/geoevent"
+    host = "http://0media.tw/t/geoevent"
+    #host = "http://zbryikt.github.io/geoevent"
     #host = ""
     $scope.initz = 1
     $scope.autoll = true
