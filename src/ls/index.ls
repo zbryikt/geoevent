@@ -3,7 +3,7 @@ angular.module \main, <[0media.events]>
     host = "http://0media.tw/t/geoevent"
     #host = "http://zbryikt.github.io/geoevent"
     #host = ""
-    $scope.initz = 2
+    $scope.initz = 1
     $scope.autoll = true
     $scope.clat = null
     $scope.clng = null
@@ -35,5 +35,5 @@ angular.module \main, <[0media.events]>
       ratio: 20
       clat: 12.573404
       clng: -15.193685
-      initz: 1
+      initz: 2
 
