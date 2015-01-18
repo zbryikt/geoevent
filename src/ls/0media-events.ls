@@ -63,7 +63,7 @@ angular.module \0media.events, <[]>
       # TODO find a better approach
       if $scope.$parent.config => config <<< $scope.$parent.config
       if config.currentURL => $scope.currentURL = config.currentURL
-      else => $scope.currentURL = "http://0media.tw/t/geoevent/?" + ["#k=#{encodeURIComponent(v)}" for k,v of config].join(\&)
+      else => $scope.currentURL = "http://0media.tw/t/geoevent/widget/?" + ["#k=#{encodeURIComponent(v)}" for k,v of config].join(\&)
          
       # first request, get spreadsheet title
       (d) <- $http do
