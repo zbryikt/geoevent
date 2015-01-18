@@ -12,7 +12,13 @@ parsed = []
 #console.log "parsing list..."
 for h3 in $('#mw-content-text h3')
   year = $(h3).find('.mw-headline').text!trim!
-  list =  $(h3).next!find("li")
+  list = []
+  node = $(h3)
+  while true
+    node = $(node.next!)
+    if node.find(".mw-headline").length => break
+    for li in node.find("li") => list.push li
+
   for li in list
     li = $(li)
     content = li.text!
@@ -28,6 +34,7 @@ for h3 in $('#mw-content-text h3')
     #console.log "* #year/#month/#day -- #name - #href "
     date = new Date(year, month, day or 1)
     data = {date, year, month, day, name, href}
+    console.log year, month, day
     parsed.push data
 
 handler = (obj) ->
