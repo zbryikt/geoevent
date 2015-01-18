@@ -20,10 +20,11 @@ You will also find a wizard for building a visualization of your own with simply
 License
 ========
 
-MIT License.
+CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/ 
 
 
 Credit
 ========
 
 Kirby T. Wu
+
