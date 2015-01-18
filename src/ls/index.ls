@@ -3,7 +3,7 @@ angular.module \main, <[0media.events]>
     host = "http://0media.tw/t/geoevent"
     #host = "http://zbryikt.github.io/geoevent"
     #host = ""
-    $scope.initz = 1
+    $scope.initz = 2
     $scope.autoll = true
     $scope.clat = null
     $scope.clng = null
