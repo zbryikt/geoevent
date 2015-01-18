@@ -112,7 +112,7 @@ html, body {
 #zm-event .main-title {
   position: absolute;
   z-index: 14;
-  top: 2px;
+  top: 0;
   left: 0;
   width: 100%;
   padding: 2px 8px;
@@ -627,6 +627,8 @@ html, body {
 #zm-event.gray .bubble {
   background: rgba(255, 128, 64, 0.4);
   border: 3px solid red; }
+#zm-event.gray .main-title {
+  background: rgba(255, 255, 255, 0.3); }
 #zm-event.gray .infopanel {
   background: rgba(255, 255, 255, 0.9);
   color: #444;
@@ -688,6 +690,8 @@ html, body {
 #zm-event.green .bubble {
   background: rgba(255, 192, 64, 0.3);
   border: 3px solid #ff5c00; }
+#zm-event.green .main-title {
+  background: rgba(255, 255, 255, 0.5); }
 #zm-event.green .infopanel {
   background: #0ea688;
   color: #fff; }
