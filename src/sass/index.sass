@@ -88,4 +88,16 @@ html,body
 #footer
   width: 100%
   min-height: 100px
+
+#forkme
+  position: absolute
+  top: -15px
+  left: -15px
+  z-index: index($order, forkme)
+  img
+    border: 0
+@media (max-width: 480px)
+  #forkme
+    display: none
+  
 @import zm-event

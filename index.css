@@ -96,6 +96,17 @@ html, body {
   width: 100%;
   min-height: 100px; }
 
+#forkme {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  z-index: 17; }
+  #forkme img {
+    border: 0; }
+
+@media (max-width: 480px) {
+  #forkme {
+    display: none; } }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }
 
