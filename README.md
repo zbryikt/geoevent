@@ -1,7 +1,7 @@
 GEOEVENT
 ========
 
-Events visualization over maps.
+Events visualization over Maps.
 
 
 Usage
