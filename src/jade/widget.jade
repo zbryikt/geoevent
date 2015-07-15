@@ -9,18 +9,18 @@
   .timeline: .timeline-inner
     .header
       .name(ng-cloak) {{current.name}}
-      .casualty(ng-cloak)
-        | {{current.casualty.die}} 
-        | death
-        // {{current.casualty.hurt}} 
-        //a -injured
+      .magsum(ng-cloak)
+        | {{current.magsum.mag1}} 
+        | {{mag1}}
+        // {{current.magsum.mag2}} 
+        //a -{{mag2}}
     .background
     .line-wrap: .line
     .events: .events-inner(ng-attr-style="top:{{events.top}}px",ng-class="{'spd1':speed==1,'spd2':speed==2,'spd3':speed==3}")
       .event(ng-repeat="event in events",
           ng-attr-style="top:{{event.top}}px;opacity:{{event.fadeout}}",
           ng-class="{'top':event.first}")
-        .circle(ng-class="{'xl':event.casualty.total>2000,'lg':event.casualty.total<2000 && event.casualty.total>500}")
+        .circle(ng-class="{'xl':event.magsum.total>2000,'lg':event.magsum.total<2000 && event.magsum.total>500}")
         .desc(ng-cloak)
           .data {{event.date}}
           .name(ng-attr-style="opacity:{{event.opacity}}") {{event.name}}
@@ -44,10 +44,10 @@
     .title(ng-cloak)
       .vc: //- for vertical-align middle
       .ib {{current.name}}
-    .casualty.pull-right
-      .c-die(ng-cloak)
-        | {{current.casualty.die}}
-        small death
-      .c-hurt(ng-cloak)
-        | {{current.casualty.hurt}}
-        small injured
+    .magsum.pull-right
+      .c-mag1(ng-cloak)
+        | {{current.magsum.mag1}}
+        small {{mag1}}
+      .c-mag2(ng-cloak)
+        | {{current.magsum.mag2}}
+        small {{mag2}}

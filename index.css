@@ -170,7 +170,7 @@ html, body {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis; }
-    #zm-event .timeline-inner .header .casualty {
+    #zm-event .timeline-inner .header .magsum {
       font-size: 0.8em; }
   #zm-event .timeline-inner .background {
     position: absolute;
@@ -343,22 +343,22 @@ html, body {
     display: inline-block;
     white-space: pre-wrap;
     line-height: 19px; }
-#zm-event .infopanel .date, #zm-event .infopanel .title, #zm-event .infopanel .casualty, #zm-event .infopanel .c-hurt, #zm-event .infopanel .c-die {
+#zm-event .infopanel .date, #zm-event .infopanel .title, #zm-event .infopanel .magsum, #zm-event .infopanel .c-mag2, #zm-event .infopanel .c-mag1 {
   display: inline-block; }
-#zm-event .infopanel .casualty {
+#zm-event .infopanel .magsum {
   margin-right: 10px; }
-#zm-event .infopanel .c-hurt, #zm-event .infopanel .c-die {
+#zm-event .infopanel .c-mag2, #zm-event .infopanel .c-mag1 {
   font-size: 0.8em;
   min-width: 60px;
   text-align: right; }
-#zm-event .infopanel .casualty {
+#zm-event .infopanel .magsum {
   display: inline-block;
   line-height: 16px;
   font-size: 12px;
   padding: 4px 0; }
-  #zm-event .infopanel .casualty > div {
+  #zm-event .infopanel .magsum > div {
     display: block; }
-  #zm-event .infopanel .casualty small {
+  #zm-event .infopanel .magsum small {
     display: inline-block;
     -ms-transform: scale(0.8);
     -moz-transform: scale(0.8);

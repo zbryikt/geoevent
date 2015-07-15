@@ -33,11 +33,11 @@
           <div class="timeline-inner">
             <div class="header">
               <div ng-cloak class="name">{{current.name}}</div>
-              <div ng-cloak class="casualty">
-                {{current.casualty.die}} 
-                death
-                <!-- {{current.casualty.hurt}} -->
-                <!--a -injured-->
+              <div ng-cloak class="magsum">
+                {{current.magsum.mag1}} 
+                {{mag1}}
+                <!-- {{current.magsum.mag2}} -->
+                <!--a -{{mag2}}-->
               </div>
             </div>
             <div class="background"></div>
@@ -47,7 +47,7 @@
             <div class="events">
               <div ng-attr-style="top:{{events.top}}px" ng-class="{'spd1':speed==1,'spd2':speed==2,'spd3':speed==3}" class="events-inner">
                 <div ng-repeat="event in events" ng-attr-style="top:{{event.top}}px;opacity:{{event.fadeout}}" ng-class="{'top':event.first}" class="event">
-                  <div ng-class="{'xl':event.casualty.total&gt;2000,'lg':event.casualty.total&lt;2000 &amp;&amp; event.casualty.total&gt;500}" class="circle"></div>
+                  <div ng-class="{'xl':event.magsum.total&gt;2000,'lg':event.magsum.total&lt;2000 &amp;&amp; event.magsum.total&gt;500}" class="circle"></div>
                   <div ng-cloak class="desc">
                     <div class="data">{{event.date}}</div>
                     <div ng-attr-style="opacity:{{event.opacity}}" class="name">{{event.name}}</div>
@@ -73,9 +73,9 @@
             </div>
             <div class="ib">{{current.name}}</div>
           </div>
-          <div class="casualty pull-right">
-            <div ng-cloak class="c-die">{{current.casualty.die}}<small>death</small></div>
-            <div ng-cloak class="c-hurt">{{current.casualty.hurt}}<small>injured</small></div>
+          <div class="magsum pull-right">
+            <div ng-cloak class="c-mag1">{{current.magsum.mag1}}<small>{{mag1}}</small></div>
+            <div ng-cloak class="c-mag2">{{current.magsum.mag2}}<small>{{mag2}}</small></div>
           </div>
         </div>
       </div>

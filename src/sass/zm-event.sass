@@ -53,7 +53,7 @@
         white-space: nowrap
         overflow: hidden
         text-overflow: ellipsis
-      .casualty
+      .magsum
         font-size: 0.8em
 
     .background
@@ -197,16 +197,16 @@
         display: inline-block
         white-space: pre-wrap
         line-height: 19px
-    .date, .title, .casualty, .c-hurt, .c-die
+    .date, .title, .magsum, .c-mag2, .c-mag1
       display: inline-block
-    .casualty
+    .magsum
       margin-right: 10px
-    .c-hurt, .c-die
+    .c-mag2, .c-mag1
       font-size: 0.8em
       min-width: 60px
       text-align: right
     //- move to media query part if needed
-    .casualty
+    .magsum
       display: inline-block
       line-height: 16px
       font-size: 12px
@@ -348,12 +348,12 @@
   padding-bottom: 70px
   .infopanel
     margin-top: 30px
-    // move date and casualty to the top if need
-      .casualty, .date
+    // move date and magsum to the top if need
+      .magsum, .date
         position: absolute
         z-index: index($order, infotext)
         top: 0
-      .casualty
+      .magsum
         right: 5px
       .date
         left: 5px
