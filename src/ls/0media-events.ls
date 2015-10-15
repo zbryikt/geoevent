@@ -26,7 +26,6 @@ angular.module \0media.events, <[]>
 
       draw: (overlay, map) ->
         z = Math.pow(2, map.getZoom! - 6)
-        console.log z
         $scope.events.map (event, i) ->
           event <<< overlay.ll2p(event.lat, event.lng){x,y}
           event.rate = z
@@ -57,34 +56,57 @@ angular.module \0media.events, <[]>
     $scope.dir = 1
     $scope.loaded = 'loading'
     $scope.initData = ->
-      config = {src: \1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo, color: \default,ratio: 1}
+      config = {src: \1yY4pqGqI3rLMf5bQqe5XMztnnJ78RMUrfh-XpJdhd_o, color: \default,ratio: 1}
       ((window.location.search or "").split(\?).filter(->it).0 or "").split \& .map -> 
         ret = it.split \=
         config[ret.0] = ret.1
-         
+      # TODO find a better approach
+      if $scope.$parent.config => config <<< $scope.$parent.config
+      if config.currentURL => $scope.currentURL = config.currentURL
+      else => 
+        $scope.currentURL = 
+          "http://0media.tw/t/geoevent/widget/?" +
+          [[k,v] for k,v of config]filter(->it.0 and typeof(it.1)!="undefined")map(->"#{it.0}=#{encodeURIComponent(it.1)}")join(\&)
+      # first request, get spreadsheet title
+      (d) <- $http do
+        url: "https://spreadsheets.google.com/feeds/worksheets/#{config.src}/public/full?alt=json"
+        method: \GET
+      .success
+      $scope.title = d.feed.title.$t
+      # second request, get workbook content
       $http do
         url: "https://spreadsheets.google.com/feeds/list/#{config.src}/1/public/values?alt=json"
         method: \GET
       .success (d) -> 
         console.log d
+        mag1 = [k for k of d.feed.entry.0]map(->/^gsx\$mag1-(.+)$/.exec it)filter(->it)0
+        mag2 = [k for k of d.feed.entry.0]map(->/^gsx\$mag2-(.+)$/.exec it)filter(->it)0
+        console.log [k for k of d.feed.entry.0]
+        $scope.mag1 = if mag1 => mag1.1 else \death
+        $scope.mag2 = if mag2 => mag2.1 else \hurt
+        mag1 = if mag1 => mag1.0 else \gsx$death
+        mag2 = if mag2 => mag2.0 else \gsx$wounded
+        console.log $scope.mag1, $scope.mag2
         data = d.feed.entry.map ->
           date = it['gsx$date']$t.replace /[年月]/g, '/'
           date = date.replace /[日]/g, ''
           dateFull = new Date(date)
           m = dateFull.getMonth! + 1
           date = (dateFull.getYear! + 1900) + "/" + (if m < 10 => "0" else "") + m
-          casualty = {die: parseInt(it.gsx$death.$t), hurt: parseInt(it.gsx$wounded.$t)}
-          casualty.total = casualty.die + casualty.hurt
-          casualty.radius = parseInt( Math.sqrt(casualty.total ) ) * 3 + 10
+          magsum = do
+            mag1: parseInt(it.{}[mag1].$t or 0)
+            mag2: parseInt(it.{}[mag2].$t or 0)
+          magsum.total = magsum.mag1 + magsum.mag2
+          magsum.radius = parseInt( Math.sqrt(magsum.total ) ) * 3 + 10
           lat = parseFloat(it['gsx$latitude']$t or 0)
           lng = parseFloat(it['gsx$longitude']$t or 0)
           name = (it['gsx$shortname']$t or it['gsx$event']$t)trim!
           loc = new google.maps.LatLng(lat, lng)
-          ret = {name, dateFull, casualty, lat, lng, loc, date}
+          ret = {name, dateFull, magsum, lat, lng, loc, date}
           ret
-        data = data.filter -> it.lat and it.lng and it.casualty.total
-        lats = data.map(->it.lat)sort!
-        lngs = data.map(->it.lng)sort!
+        data = data.filter -> it.lat and it.lng and it.magsum.total
+        lats = data.map(->parseFloat it.lat)sort (a,b) -> a - b
+        lngs = data.map(->parseFloat it.lng)sort (a,b) -> a - b
         # TODO fallback to JS animation for browsers not supporting CSS3 transition
         # Currently not used.
         step-js-animation = ->
@@ -113,7 +135,7 @@ angular.module \0media.events, <[]>
             if it.bubble.state == 1 =>
               it.bubble.state = 2
               it.circle_opacity = 0
-              it.size = it.casualty.radius * it.rate
+              it.size = it.magsum.radius * it.rate
 
             if !chosen and it.top >= 64 => 
               $scope.current = it
@@ -135,7 +157,7 @@ angular.module \0media.events, <[]>
             if ani-fire => 
               ani-fire.circle_opacity = 1
               ani-fire.bubble.state = 1
-              ani-fire.size = ani-fire.casualty.radius * ani-fire.rate * config.ratio
+              ani-fire.size = ani-fire.magsum.radius * ani-fire.rate * config.ratio
             if ani-fire => $scope.current = ani-fire
             ani-hold = data[$scope.step-count]
             if ani-hold => ani-hold.bubble.state = 2
@@ -161,7 +183,7 @@ angular.module \0media.events, <[]>
         $timeout step-transition, 0
         $scope.events = data
         $scope.reset!
-        $scope.map = map.init mapnode.0, [lats.0, lats[* - 1]], [lngs.0, lngs[* - 1]], resize, overlay-adapter
+        $scope.map = map.init mapnode.0, [lats.0, lats[* - 1]], [lngs.0, lngs[* - 1]], resize, overlay-adapter, config
         $scope.set-style config.color
         $scope.loaded = ''
         setTimeout resize, 0

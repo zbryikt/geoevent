@@ -6,11 +6,11 @@
     <title>Events Visualization</title>
     <!-- libraries-->
     <meta property="og:locale" content="zh_TW">
-    <meta property="og:image" content="http://zbryikt.github.io/visualize/disaster/img/thumbnail.png">
+    <meta property="og:image" content="http://0media.tw/t/geoevent/img/thumbnail.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="200">
     <meta property="og:image:height" content="200">
-    <meta property="og:url" content="http://zbryikt.github.io/geoevent/">
+    <meta property="og:url" content="http://0media.tw/t/geoevent/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Events Visualization">
     <meta property="og:description" content="This tool helps you visualize events across time, using bubble to show the magnitude of specific event.">
@@ -24,15 +24,21 @@
     <script type="text/javascript" src="../index.js"></script>
     <script src="//maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places"></script>
   </head>
-  <body>
+  <body style="overflow:hidden">
     <div id="widget" ng-app="0media.events" ng-controller="0media.events.main">
       <div id="zm-event" ng-class="[style,loaded,dim.htype,dim.wtype]" class="default">
-        <div class="dimmer"><img src="../img/spin.gif"><br><br>Preparing the timeline</div>
+        <div ng-cloak class="main-title">{{title}}</div>
+        <div class="dimmer"><img src="img/spin.gif"><br><br>Preparing the timeline</div>
         <div class="timeline">
           <div class="timeline-inner">
             <div class="header">
-              <div class="name">{{current.name}}</div>
-              <div class="casualty">{{current.casualty.die}}死 {{current.casualty.hurt}}傷</div>
+              <div ng-cloak class="name">{{current.name}}</div>
+              <div ng-cloak class="magsum">
+                {{current.magsum.mag1}} 
+                {{mag1}}
+                <!-- {{current.magsum.mag2}} -->
+                <!--a -{{mag2}}-->
+              </div>
             </div>
             <div class="background"></div>
             <div class="line-wrap">
@@ -41,8 +47,8 @@
             <div class="events">
               <div ng-attr-style="top:{{events.top}}px" ng-class="{'spd1':speed==1,'spd2':speed==2,'spd3':speed==3}" class="events-inner">
                 <div ng-repeat="event in events" ng-attr-style="top:{{event.top}}px;opacity:{{event.fadeout}}" ng-class="{'top':event.first}" class="event">
-                  <div ng-class="{'xl':event.casualty.total&gt;2000,'lg':event.casualty.total&lt;2000 &amp;&amp; event.casualty.total&gt;500}" class="circle"></div>
-                  <div class="desc">
+                  <div ng-class="{'xl':event.magsum.total&gt;2000,'lg':event.magsum.total&lt;2000 &amp;&amp; event.magsum.total&gt;500}" class="circle"></div>
+                  <div ng-cloak class="desc">
                     <div class="data">{{event.date}}</div>
                     <div ng-attr-style="opacity:{{event.opacity}}" class="name">{{event.name}}</div>
                   </div>
@@ -51,21 +57,25 @@
             </div>
           </div>
         </div>
-        <div class="ctrlpanel"><i ng-click="reset()" class="glyphicon glyphicon-fast-backward"></i><i ng-click="play()" ng-show="state!=1" class="glyphicon glyphicon-play"></i><i ng-click="pause()" ng-show="state!=0" class="glyphicon glyphicon-pause"></i><i ng-click="speeding()" class="glyphicon speed">{{speed}}X</i>
+        <div class="ctrlpanel"><i ng-click="reset()" class="glyphicon glyphicon-fast-backward"></i><i ng-click="play()" ng-show="state==0" class="glyphicon glyphicon-play"></i><i ng-click="pause()" ng-show="state!=0" class="glyphicon glyphicon-pause"></i><i ng-click="speeding()" ng-cloak class="glyphicon speed">{{speed}}X</i>
           <div class="pull-right"><i ng-click="step(-1)" ng-class="{'active':dir==-1}" class="glyphicon glyphicon-chevron-up"></i><i ng-click="step(1)" ng-class="{'active':dir==1}" class="glyphicon glyphicon-chevron-down"></i></div>
         </div>
         <div class="eventmap"></div>
         <div class="bubbles">
           <div ng-repeat="event in events" ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}" ng-class="{'in':event.bubble.state==1,'out':event.bubble.state==2}" class="bubble"></div>
         </div>
-        <div onclick="window.location.href='http://zbryikt.github.io/geoevent/'" class="home-popover">build your own map!</div>
+        <div onclick="window.location.href='http://0media.tw/t/geoevent/'" class="home-popover">build your own map!</div>
         <div class="infopanel">
-          <div class="pull-right"><i onclick="window.location.href='http://zbryikt.github.io/geoevent/'" class="glyphicon glyphicon-home"></i></div>
+          <div class="action pull-right"><a ng-attr-href="{{currentURL}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i></a></div>
           <div ng-cloak class="date pull-left">{{current.date}}</div>
-          <div ng-cloak class="title">{{current.name}}</div>
-          <div class="casualty pull-right">
-            <div ng-cloak class="c-die">{{current.casualty.die}}<small>死</small></div>
-            <div ng-cloak class="c-hurt">{{current.casualty.hurt}}<small>傷</small></div>
+          <div ng-cloak class="title">
+            <div class="vc">
+            </div>
+            <div class="ib">{{current.name}}</div>
+          </div>
+          <div class="magsum pull-right">
+            <div ng-cloak class="c-mag1">{{current.magsum.mag1}}<small>{{mag1}}</small></div>
+            <div ng-cloak class="c-mag2">{{current.magsum.mag2}}<small>{{mag2}}</small></div>
           </div>
         </div>
       </div>
@@ -75,7 +85,7 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-54066900-1', 'auto');
+      ga('create', 'UA-52410923-1', 'auto');
       ga('send', 'pageview');
     </script>
   </body>

@@ -12,14 +12,23 @@
     width: 100%
     height: 100%
     z-index: index($order, eventmap)
+  .main-title
+    position: absolute
+    z-index: index($order, main-title)
+    top: 0
+    left: 0
+    width: 100%
+    padding: 2px 8px
+    text-align: center
   .timeline
     height: 100%
-    padding: 20px 0 70px 20px
+    padding: 30px 0 70px 20px
     z-index: index($order, timeline)
     position: absolute
     top: 0
     left: 0
     width: 220px
+    @include no-selection
   .timeline-inner
     position: relative
     border-radius: 5px
@@ -44,7 +53,7 @@
         white-space: nowrap
         overflow: hidden
         text-overflow: ellipsis
-      .casualty
+      .magsum
         font-size: 0.8em
 
     .background
@@ -170,16 +179,44 @@
     @include no-selection
     .glyphicon
       cursor: pointer
-
+    .action
+      position: relative
+      z-index: index($order, action)
   .infopanel
-    .date, .title, .casualty, .c-hurt, .c-die
+    .title
+      position: absolute
+      left: 0
+      padding: 0 120px 0 75px
+      width: 100%
+      white-space: no-wrap
+      .vc
+        display: inline-block
+        vertical-align: middle
+        height: 40px
+      .ib
+        display: inline-block
+        white-space: pre-wrap
+        line-height: 19px
+    .date, .title, .magsum, .c-mag2, .c-mag1
       display: inline-block
-    .casualty
+    .magsum
       margin-right: 10px
-    .c-hurt, .c-die
+    .c-mag2, .c-mag1
       font-size: 0.8em
       min-width: 60px
       text-align: right
+    //- move to media query part if needed
+    .magsum
+      display: inline-block
+      line-height: 16px
+      font-size: 12px
+      padding: 4px 0
+      & > div
+        display: block
+      small
+        display: inline-block
+        @include transform(scale(0.8))
+        width: 45px
 
   .bubble
     width: 0
@@ -196,6 +233,10 @@
     &.out
       @include transition(width 1s ease-out, height 1s ease-out, opacity 2s ease-out)
   .dimmer
+    position: absolute
+    top: 0
+    left: 0
+    z-index: index($order, dimmer)
     display: none
     background: rgba(128,128,128,1) url(img/blurmap.jpg) center center no-repeat
     background-size: cover
@@ -267,12 +308,20 @@
 @include dim-max(w,xs,#zm-event)
   .home-popover
     font-size: 12px
+  .main-title
+    font-size: 12px
   .ctrlpanel
     border-radius: 5px
     top: initial
     bottom: 50px
     width: 170px
     left: 10px
+  .infopanel 
+    .title
+      font-size: 0.8em
+    .date
+      font-size: 12px
+
   .events
     margin-top: 10px
   .line-wrap
@@ -299,21 +348,12 @@
   padding-bottom: 70px
   .infopanel
     margin-top: 30px
-    .casualty
-      display: inline-block
-      line-height: 16px
-      font-size: 12px
-      padding: 4px 0
-      & > div
-        display: block
-    .date
-      font-size: 12px
-    // move date and casualty to the top if need
-      .casualty, .date
+    // move date and magsum to the top if need
+      .magsum, .date
         position: absolute
         z-index: index($order, infotext)
         top: 0
-      .casualty
+      .magsum
         right: 5px
       .date
         left: 5px

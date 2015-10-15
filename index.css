@@ -96,6 +96,17 @@ html, body {
   width: 100%;
   min-height: 100px; }
 
+#forkme {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  z-index: 17; }
+  #forkme img {
+    border: 0; }
+
+@media (max-width: 480px) {
+  #forkme {
+    display: none; } }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }
 
@@ -109,14 +120,28 @@ html, body {
   width: 100%;
   height: 100%;
   z-index: 1; }
+#zm-event .main-title {
+  position: absolute;
+  z-index: 14;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2px 8px;
+  text-align: center; }
 #zm-event .timeline {
   height: 100%;
-  padding: 20px 0 70px 20px;
+  padding: 30px 0 70px 20px;
   z-index: 4;
   position: absolute;
   top: 0;
   left: 0;
-  width: 220px; }
+  width: 220px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
 #zm-event .timeline-inner {
   position: relative;
   border-radius: 5px;
@@ -145,7 +170,7 @@ html, body {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis; }
-    #zm-event .timeline-inner .header .casualty {
+    #zm-event .timeline-inner .header .magsum {
       font-size: 0.8em; }
   #zm-event .timeline-inner .background {
     position: absolute;
@@ -301,14 +326,46 @@ html, body {
   user-select: none; }
   #zm-event .infopanel .glyphicon {
     cursor: pointer; }
-#zm-event .infopanel .date, #zm-event .infopanel .title, #zm-event .infopanel .casualty, #zm-event .infopanel .c-hurt, #zm-event .infopanel .c-die {
+  #zm-event .infopanel .action {
+    position: relative;
+    z-index: 13; }
+#zm-event .infopanel .title {
+  position: absolute;
+  left: 0;
+  padding: 0 120px 0 75px;
+  width: 100%;
+  white-space: no-wrap; }
+  #zm-event .infopanel .title .vc {
+    display: inline-block;
+    vertical-align: middle;
+    height: 40px; }
+  #zm-event .infopanel .title .ib {
+    display: inline-block;
+    white-space: pre-wrap;
+    line-height: 19px; }
+#zm-event .infopanel .date, #zm-event .infopanel .title, #zm-event .infopanel .magsum, #zm-event .infopanel .c-mag2, #zm-event .infopanel .c-mag1 {
   display: inline-block; }
-#zm-event .infopanel .casualty {
+#zm-event .infopanel .magsum {
   margin-right: 10px; }
-#zm-event .infopanel .c-hurt, #zm-event .infopanel .c-die {
+#zm-event .infopanel .c-mag2, #zm-event .infopanel .c-mag1 {
   font-size: 0.8em;
   min-width: 60px;
   text-align: right; }
+#zm-event .infopanel .magsum {
+  display: inline-block;
+  line-height: 16px;
+  font-size: 12px;
+  padding: 4px 0; }
+  #zm-event .infopanel .magsum > div {
+    display: block; }
+  #zm-event .infopanel .magsum small {
+    display: inline-block;
+    -ms-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    transform: scale(0.8);
+    width: 45px; }
 #zm-event .bubble {
   width: 0;
   height: 0;
@@ -336,6 +393,10 @@ html, body {
     -o-transition: width 1s ease-out, height 1s ease-out, opacity 2s ease-out;
     transition: width 1s ease-out, height 1s ease-out, opacity 2s ease-out; }
 #zm-event .dimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 16;
   display: none;
   background: gray url(img/blurmap.jpg) center center no-repeat;
   background-size: cover;
@@ -369,7 +430,7 @@ html, body {
   background: #fff;
   padding: 1px 7px;
   border-radius: 3px;
-  z-index: 13;
+  z-index: 15;
   font-size: 14px;
   cursor: pointer;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); }
@@ -425,12 +486,18 @@ html, body {
 
 #zm-event.w-mc .home-popover {
   font-size: 12px; }
+#zm-event.w-mc .main-title {
+  font-size: 12px; }
 #zm-event.w-mc .ctrlpanel {
   border-radius: 5px;
   top: initial;
   bottom: 50px;
   width: 170px;
   left: 10px; }
+#zm-event.w-mc .infopanel .title {
+  font-size: 0.8em; }
+#zm-event.w-mc .infopanel .date {
+  font-size: 12px; }
 #zm-event.w-mc .events {
   margin-top: 10px; }
 #zm-event.w-mc .line-wrap {
@@ -454,12 +521,18 @@ html, body {
 
 #zm-event.w-xs .home-popover {
   font-size: 12px; }
+#zm-event.w-xs .main-title {
+  font-size: 12px; }
 #zm-event.w-xs .ctrlpanel {
   border-radius: 5px;
   top: initial;
   bottom: 50px;
   width: 170px;
   left: 10px; }
+#zm-event.w-xs .infopanel .title {
+  font-size: 0.8em; }
+#zm-event.w-xs .infopanel .date {
+  font-size: 12px; }
 #zm-event.w-xs .events {
   margin-top: 10px; }
 #zm-event.w-xs .line-wrap {
@@ -485,15 +558,6 @@ html, body {
   padding-bottom: 70px; }
   #zm-event.w-mc .infopanel {
     margin-top: 30px; }
-    #zm-event.w-mc .infopanel .casualty {
-      display: inline-block;
-      line-height: 16px;
-      font-size: 12px;
-      padding: 4px 0; }
-      #zm-event.w-mc .infopanel .casualty > div {
-        display: block; }
-    #zm-event.w-mc .infopanel .date {
-      font-size: 12px; }
   #zm-event.w-mc .ctrlpanel {
     border-radius: 5px;
     top: initial;
@@ -519,6 +583,9 @@ html, body {
 #zm-event.default .bubble {
   background: rgba(255, 128, 64, 0.3);
   border: 4px solid red; }
+#zm-event.default .main-title {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5); }
 #zm-event.default .infopanel {
   background: #2d3240;
   color: #eee; }
@@ -571,10 +638,14 @@ html, body {
 #zm-event.gray .bubble {
   background: rgba(255, 128, 64, 0.4);
   border: 3px solid red; }
+#zm-event.gray .main-title {
+  background: rgba(255, 255, 255, 0.3); }
 #zm-event.gray .infopanel {
   background: rgba(255, 255, 255, 0.9);
   color: #444;
   text-shadow: none; }
+  #zm-event.gray .infopanel .action a {
+    color: #999; }
 #zm-event.gray .ctrlpanel {
   background: rgba(255, 255, 255, 0.9);
   color: #444; }
@@ -630,9 +701,13 @@ html, body {
 #zm-event.green .bubble {
   background: rgba(255, 192, 64, 0.3);
   border: 3px solid #ff5c00; }
+#zm-event.green .main-title {
+  background: rgba(255, 255, 255, 0.5); }
 #zm-event.green .infopanel {
   background: #0ea688;
   color: #fff; }
+  #zm-event.green .infopanel .action a {
+    color: #ff9; }
 #zm-event.green .ctrlpanel {
   background: rgba(14, 166, 136, 0.9);
   color: #fff; }

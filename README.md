@@ -28,7 +28,7 @@ now the web page will be served at http://localhost:9999/
 License
 ========
 
-CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/ 
+MIT License
 
 
 Credit

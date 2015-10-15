@@ -1,10 +1,10 @@
 angular.module \0media.events
   ..factory \0media.events.map, <[]> ++ -> do
-    init: (node, lats, lngs, resize, overlay) ->
+    init: (node, lats, lngs, resize, overlay, config) ->
       map-option = do
         center: new google.maps.LatLng 23.624146, 120.320623
-        zoom: 9
-        minZoom: 2
+        zoom: parseInt(config.initz or 9)
+        minZoom: 1
         maxZoom: 18
         mapTypeId: google.maps.MapTypeId.ROADMAP
         panControl: false
@@ -13,17 +13,19 @@ angular.module \0media.events
         streetViewControl: false
         zoomControlOptions: position: google.maps.ControlPosition.RIGHT_CENTER
 
-      map-bound = new google.maps.LatLngBounds!
-      #bound-ptrs = [[25.471911, 119.455903] [21.707318, 122.356293]]
-      bound-ptrs = [[lats.1, lngs.0] [lats.0, lngs.1]]
-      bound-ptrs.map(-> new google.maps.LatLng it.0, it.1)map(->map-bound.extend it)
+      if config.clat and config.clng =>
+        map-option.center = new google.maps.LatLng parseFloat(config.clat), parseFloat(config.clng)
+      else
+        map-bound = new google.maps.LatLngBounds!
+        bound-ptrs = [[lats.1, lngs.0] [lats.0, lngs.1]]
+        bound-ptrs.map(-> new google.maps.LatLng it.0, it.1)map(->map-bound.extend it)
       simdate = (date) -> date.getYear! + 1900
 
-
       map = new google.maps.Map node, map-option
-      map.fitBounds map-bound
+      if map-bound => map.fitBounds map-bound
 
       google.maps.event.addDomListener window, 'resize', ->
+        if !map-bound => map-bound := map.getBounds!
         [w,h] = [$(node).width!, $(node).height!]
         map.fitBounds map-bound
         b = map.getBounds!

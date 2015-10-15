@@ -6,11 +6,11 @@
     <title>Events Visualization</title>
     <!-- libraries-->
     <meta property="og:locale" content="zh_TW">
-    <meta property="og:image" content="http://zbryikt.github.io/geoevent/img/thumbnail.png">
+    <meta property="og:image" content="http://0media.tw/t/geoevent/img/thumbnail.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="200">
     <meta property="og:image:height" content="200">
-    <meta property="og:url" content="http://zbryikt.github.io/geoevent/">
+    <meta property="og:url" content="http://0media.tw/t/geoevent/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Events Visualization">
     <meta property="og:description" content="This tool helps you visualize events across time, using bubble to show the magnitude of specific event.">
@@ -37,12 +37,18 @@
           </div>
           <div id="main">
             <div id="zm-event" ng-class="[style,loaded,dim.htype,dim.wtype]" class="default">
+              <div ng-cloak class="main-title">{{title}}</div>
               <div class="dimmer"><img src="img/spin.gif"><br><br>Preparing the timeline</div>
               <div class="timeline">
                 <div class="timeline-inner">
                   <div class="header">
-                    <div class="name">{{current.name}}</div>
-                    <div class="casualty">{{current.casualty.die}}死 {{current.casualty.hurt}}傷</div>
+                    <div ng-cloak class="name">{{current.name}}</div>
+                    <div ng-cloak class="magsum">
+                      {{current.magsum.mag1}} 
+                      {{mag1}}
+                      <!-- {{current.magsum.mag2}} -->
+                      <!--a -{{mag2}}-->
+                    </div>
                   </div>
                   <div class="background"></div>
                   <div class="line-wrap">
@@ -51,8 +57,8 @@
                   <div class="events">
                     <div ng-attr-style="top:{{events.top}}px" ng-class="{'spd1':speed==1,'spd2':speed==2,'spd3':speed==3}" class="events-inner">
                       <div ng-repeat="event in events" ng-attr-style="top:{{event.top}}px;opacity:{{event.fadeout}}" ng-class="{'top':event.first}" class="event">
-                        <div ng-class="{'xl':event.casualty.total&gt;2000,'lg':event.casualty.total&lt;2000 &amp;&amp; event.casualty.total&gt;500}" class="circle"></div>
-                        <div class="desc">
+                        <div ng-class="{'xl':event.magsum.total&gt;2000,'lg':event.magsum.total&lt;2000 &amp;&amp; event.magsum.total&gt;500}" class="circle"></div>
+                        <div ng-cloak class="desc">
                           <div class="data">{{event.date}}</div>
                           <div ng-attr-style="opacity:{{event.opacity}}" class="name">{{event.name}}</div>
                         </div>
@@ -61,7 +67,7 @@
                   </div>
                 </div>
               </div>
-              <div class="ctrlpanel"><i ng-click="reset()" class="glyphicon glyphicon-fast-backward"></i><i ng-click="play()" ng-show="state!=1" class="glyphicon glyphicon-play"></i><i ng-click="pause()" ng-show="state!=0" class="glyphicon glyphicon-pause"></i><i ng-click="speeding()" class="glyphicon speed">{{speed}}X</i>
+              <div class="ctrlpanel"><i ng-click="reset()" class="glyphicon glyphicon-fast-backward"></i><i ng-click="play()" ng-show="state==0" class="glyphicon glyphicon-play"></i><i ng-click="pause()" ng-show="state!=0" class="glyphicon glyphicon-pause"></i><i ng-click="speeding()" ng-cloak class="glyphicon speed">{{speed}}X</i>
                 <div class="pull-right"><i ng-click="step(-1)" ng-class="{'active':dir==-1}" class="glyphicon glyphicon-chevron-up"></i><i ng-click="step(1)" ng-class="{'active':dir==1}" class="glyphicon glyphicon-chevron-down"></i></div>
               </div>
               <div class="eventmap"></div>
@@ -69,12 +75,16 @@
                 <div ng-repeat="event in events" ng-attr-style="top:{{event.y}}px;left:{{event.x}}px;width:{{event.size}}px;height:{{event.size}}px;opacity:{{event.circle_opacity}}" ng-class="{'in':event.bubble.state==1,'out':event.bubble.state==2}" class="bubble"></div>
               </div>
               <div class="infopanel">
-                <div class="pull-right"><i class="glyphicon glyphicon-share"></i></div>
+                <div class="action pull-right"><a ng-attr-href="{{currentURL}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i></a></div>
                 <div ng-cloak class="date pull-left">{{current.date}}</div>
-                <div ng-cloak class="title">{{current.name}}</div>
-                <div class="casualty pull-right">
-                  <div ng-cloak class="c-die">{{current.casualty.die}}<small>死</small></div>
-                  <div ng-cloak class="c-hurt">{{current.casualty.hurt}}<small>傷</small></div>
+                <div ng-cloak class="title">
+                  <div class="vc">
+                  </div>
+                  <div class="ib">{{current.name}}</div>
+                </div>
+                <div class="magsum pull-right">
+                  <div ng-cloak class="c-mag1">{{current.magsum.mag1}}<small>{{mag1}}</small></div>
+                  <div ng-cloak class="c-mag2">{{current.magsum.mag2}}<small>{{mag2}}</small></div>
                 </div>
               </div>
             </div>
@@ -84,14 +94,30 @@
           <hr>
           <div data-share="false" data-show-faces="false" data-layout="button_count" class="fb-like pull-right"></div>
           <h2>Events Visualization</h2>
-          <p>This tool helps you visualize events across time, using bubble to show the magnitude of specific event.</p>
+          <p>This tool helps you visualize events across time and space with bubbles of magnitude of events, and works on devices with different screen size. Above is an example of <a href="http://0media.tw/t/geoevent/widget/?src=1yY4pqGqI3rLMf5bQqe5XMztnnJ78RMUrfh-XpJdhd_o&amp;color=default&amp;ratio=20&amp;=undefined&amp;clat=12.573404&amp;clng=-15.193685&amp;initz=2">visualization of Islamic terrorist attacks from 1983 to 2015</a>.<br>
+            <h4>Other showcase:</h4>
+            <ul>
+              <li><a href="http://0media.tw/t/geoevent/widget/?src=17u9luNKn77I4Tyz3pPADnr6sw3yiob0Z6Dy4_FFpbl4&amp;color=default&amp;ratio=5&amp;clat=20&amp;clng=0&amp;initz=2">Global Earthquake since 1902</a></li>
+              <li><a href="http://0media.tw/t/geoevent/widget/?src=1weTyy3X52QginfNbrSmxjR8WpsAEgJSRjzzqBJ8RaXk&amp;color=default&amp;ratio=20&amp;clat=20&amp;clng=0&amp;initz=2">Global Commercial Aricraft Accident </a>( partial data )</li>
+            </ul>
+          </p>
           <hr>
           <h3>How to Use</h3>
-          <p>You need to put the event data in google spreadsheet formatted like this one:</p>
-          <iframe id="sample-doc" src="https://docs.google.com/spreadsheets/d/1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo/pubhtml?widget=true&amp;amp;headers=false"></iframe><br><br>
-          <p>Then, in the menu bar of the desired spreadsheet, click <em>Menu  </em>&#xbb; <em>Publish to the Web </em>&#xbb;  <em>Publish</em>to make it public to anyone.</p>
+          <p>prepare the event data in a google spreadsheet formatted like this:</p>
+          <iframe id="sample-doc" src="https://docs.google.com/spreadsheets/d/1yY4pqGqI3rLMf5bQqe5XMztnnJ78RMUrfh-XpJdhd_o/pubhtml?widget=true&amp;amp;headers=false"></iframe><br><br>
+          <p>7 columns are required in following order: date, event, shortname, death, wounded, latitude, longitude:
+            <ul>
+              <li><em>date</em>: Event date. YYYY/MM/DD or MM/DD/YYYY</li>
+              <li><em>event</em>: Event name. shown in timeline only if shortname is omitted</li>
+              <li><em>shortname</em>: short name of event for showing in timeline</li>
+              <li><em>death</em>: number of death</li>
+              <li><em>wounded</em>: number of wounded</li>
+              <li><em>latitude  </em>and <em>longitude</em>: coordinate of the event </li>
+            </ul>
+          </p>
+          <p>and publish the spreadsheet by clicking <em>"Menu"  </em>&#xbb; <em>"Publish to the Web" </em>&#xbb;  <em>"Publish"</em></p>
           <p>Copy &amp; paste the link of the spreadsheet in this input box:</p>
-          <div class="form-group">
+          <div ng-class="{'has-error':sid==null &amp;&amp; datasrc}" class="form-group">
             <input placeholder="e.g., https://docs.google.com/spreadsheets/d/1p0DNKBt4oNfDBgHv4ZXH-vu0bJ_PtxFFXCL7o4O_Cxo/pubhtml" ng-model="datasrc" class="form-control">
           </div>
           <p>and setup following configuration:</p>
@@ -112,18 +138,33 @@
                 <div ng-click="setRatio(20)" ng-class="{'active':ratio==20}" class="btn btn-primary btn-sm">Large</div>
               </div>
             </div>
+            <div class="form-group">
+              <label>central latlng &nbsp; 
+                <input type="checkbox" checked ng-model="autoll"><small> auto</small>
+              </label><br>
+              <input style="max-width:90px" ng-model="clat" placeholder="latitude" ng-disabled="autoll" class="form-control input-sm">
+              <input style="max-width:90px" ng-model="clng" placeholder="longitude" ng-disabled="autoll" class="form-control input-sm">
+            </div>
+            <div class="form-group">
+              <label>initial zoom level</label><br>
+              <select ng-options="v for v in zlvs" ng-model="initz" style="min-width:120px" ng-disabled="autoll" class="form-control input-sm"></select>
+            </div>
+            <div class="form-group">
+              <label>&nbsp;</label><br>
+              <div ng-click="generate()" class="btn btn-danger btn-sm">Generate</div>
+            </div>
           </div><br>
-          <p>sample output will be like this:</p>
-          <iframe id="result" ng-attr-src="{{outurl}}"></iframe>
-          <p>here is the html code for embedding this in websites:</p>
-          <textarea ng-model="embedcode" rows="5" class="form-control"></textarea>
-          <p>or the direct link to the result page:</p>
+          <p>result looks like this:</p>
+          <iframe id="result"></iframe>
+          <p>html code for embedding in your websites:</p>
+          <textarea ng-model="embedcode" rows="5" class="form-control"></textarea><br>
+          <p>direct link to the result page: ( <a ng-attr-href="{{outurlwithhost}}" target="_blank">open in new tab</a> )</p>
           <input ng-model="outurlwithhost" ng-disabled="true" class="form-control"><br>
           <hr><br>
           <div id="footer">For source code, please visit <a href="http://github.com/zbryikt/geoevent/">Github Repo</a> of the events visualization project.</div>
         </div>
       </div>
-    </div>
+    </div><a id="forkme" href="https://github.com/zbryikt/geoevent"><img src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc60081495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
     <script>
       window.fbAsyncInit = function() {
         FB.init({
@@ -146,7 +187,7 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-54066900-1', 'auto');
+      ga('create', 'UA-52410923-1', 'auto');
       ga('send', 'pageview');
     </script>
   </body>
